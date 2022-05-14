@@ -5,7 +5,7 @@ services:
       context: ./docker/app
       dockerfile: Dockerfile
     volumes:
-      - ./frontend:/usr/src/app 
-    command:  npm run dev"
+      - ./frontend:/usr/app 
+    command:  "npm run dev"
     ports:
       - "3000:3000"
