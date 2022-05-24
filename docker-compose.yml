@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./frontend:/usr/app 
-    command:  "npm run dev"
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+    command:  "yarn run dev"
     ports:
       - "3000:3000"
