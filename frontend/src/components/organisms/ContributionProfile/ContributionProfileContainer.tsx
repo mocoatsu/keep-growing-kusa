@@ -7,7 +7,6 @@ export const ContributionProfileContainer = () => {
   return (
     <ContributionProfilePresenter
       contribution={data}
-      // contribution={"data"}
     ></ContributionProfilePresenter>
   );
 };

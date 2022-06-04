@@ -1,4 +1,5 @@
 import { request, GraphQLClient } from "graphql-request";
+import { getSdk } from "./type";
 
 interface graqhQLArgs {
   endpoint: string;
@@ -13,6 +14,10 @@ export const graqhQLRequest = (args: graqhQLArgs): Promise<any> => {
     "Content-Type": "application/json",
   };
 
+  const client = getSdk(new GraphQLClient(args.endpoint, { headers: config }));
+  client.getContributions({ userName: "TheSelfAtu" }).then((v) => {
+    v.user?.contributionsCollection;
+  });
   return request({
     url: args.endpoint,
     document: args.query,

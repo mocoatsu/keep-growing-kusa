@@ -1,10 +1,10 @@
-import { request, gql } from "graphql-request";
+import { gql } from "graphql-request";
 
 // 発行する GraphQL クエリ
 
 // コントリビューションを取得するクエリ
 export const contributionsQuery = gql`
-  query ($userName: String!) {
+  query getContributions($userName: String!) {
     user(login: $userName) {
       contributionsCollection {
         contributionCalendar {
