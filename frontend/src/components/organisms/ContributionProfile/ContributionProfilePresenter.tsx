@@ -3,5 +3,5 @@ interface props {
 }
 
 export const ContributionProfilePresenter = (props: props) => {
-  return <p>{"presenter"}</p>;
+  return <p>{props.contribution}</p>;
 };

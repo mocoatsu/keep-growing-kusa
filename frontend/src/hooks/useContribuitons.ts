@@ -3,7 +3,10 @@ import { ContributionWeeks } from "../domain/ContributionWeeks";
 import { fetchContributions } from "../infrastructure/Github/githubApi";
 import { contributionsQuery } from "../infrastructure/GraphQL/query";
 
-export const useContribution = () => {
+export const useContribution = (): {
+  contributionWeeks: ContributionWeeks;
+  error: any;
+} => {
   const githubSWRResponse = useSWR(contributionsQuery, fetchContributions, {
     suspense: true,
   });
@@ -13,7 +16,7 @@ export const useContribution = () => {
       .weeks ?? undefined;
 
   return {
-    data: weekContributions ? new ContributionWeeks(weekContributions) : {},
+    contributionWeeks: new ContributionWeeks(weekContributions),
     error: githubSWRResponse.error,
   };
 };

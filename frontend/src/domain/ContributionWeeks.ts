@@ -17,7 +17,7 @@ type Contributionweeks = Array<{
 export class ContributionWeeks {
   private value: Contributionweeks;
 
-  constructor(v: Contributionweeks) {
+  constructor(v: Contributionweeks = []) {
     this.value = v;
   }
 
