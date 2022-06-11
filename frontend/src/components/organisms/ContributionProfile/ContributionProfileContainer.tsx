@@ -4,6 +4,7 @@ import { ContributionProfilePresenter } from "./ContributionProfilePresenter";
 
 export const ContributionProfileContainer = () => {
   const { data, error } = useContribution();
+  const contributionToday = data;
   return (
     <ContributionProfilePresenter
       contribution={data}

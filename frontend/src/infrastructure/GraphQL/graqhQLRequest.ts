@@ -1,5 +1,5 @@
 import { GraphQLClient } from "graphql-request";
-import { getSdk } from "./type";
+import { GetContributionsQuery, getSdk } from "./type";
 
 interface graqhQLArgs {
   endpoint: string;
@@ -8,7 +8,9 @@ interface graqhQLArgs {
   variables: { userName: string };
 }
 
-export const graqhQLRequest = async (args: graqhQLArgs): Promise<any> => {
+export const graqhQLRequest = async (
+  args: graqhQLArgs
+): Promise<GetContributionsQuery> => {
   const config = {
     authorization: `Bearer ${args.token}`,
     "Content-Type": "application/json",
