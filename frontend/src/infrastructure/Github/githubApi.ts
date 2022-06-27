@@ -1,7 +1,12 @@
 import "cross-fetch/polyfill"; // グローバルな fetch 関数を定義する
-import { graqhQLRequest } from "../GraphQL/graqhQLRequest";
-import { contributionsQuery } from "../GraphQL/query";
-import { GetContributionsQuery, Sdk } from "../GraphQL/type";
+import { graqhQLClient } from "../GraphQL/graqhQLClient";
+import { contributionsQuery, userQuery } from "../GraphQL/query";
+import {
+  GetContributionsQuery,
+  getSdk,
+  GetUserQuery,
+  Sdk,
+} from "../GraphQL/type";
 
 // .env ファイルの内容を環境変数に反映
 const token = process.env.NEXT_PUBLIC_MYAPP_GITHUB_TOKEN;
@@ -18,5 +23,15 @@ export const fetchContributions = async (): Promise<GetContributionsQuery> => {
     token: token,
     variables: variables,
   };
-  return graqhQLRequest(args);
+  return getSdk(graqhQLClient(args)).getContributions(variables);
+};
+
+export const fetchUser = async (): Promise<GetUserQuery> => {
+  const args = {
+    endpoint: "https://api.github.com/graphql",
+    query: userQuery,
+    token: token,
+    variables: variables,
+  };
+  return getSdk(graqhQLClient(args)).getUser(variables);
 };
