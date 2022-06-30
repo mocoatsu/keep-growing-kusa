@@ -22,3 +22,15 @@ export const contributionsQuery = gql`
     }
   }
 `;
+
+export const userQuery = gql`
+  query getUser($userName: String!) {
+    user(login: $userName) {
+      login # ログインID
+      name # ユーザー名
+      url # ユーザーの GitHub ホームページ
+      websiteUrl # ユーザーの Web サイト
+      avatarUrl # ユーザーのアバター画像
+    }
+  }
+`;
