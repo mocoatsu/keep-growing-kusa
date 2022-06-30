@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { ContributionProfileContainer } from "./ContributionProfileContainer";
+import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 
 import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 
