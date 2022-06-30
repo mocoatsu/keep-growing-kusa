@@ -1,12 +1,7 @@
-import "cross-fetch/polyfill"; // グローバルな fetch 関数を定義する
+import "cross-fetch/polyfill";
 import { graqhQLClient } from "../GraphQL/graqhQLClient";
 import { contributionsQuery, userQuery } from "../GraphQL/query";
-import {
-  GetContributionsQuery,
-  getSdk,
-  GetUserQuery,
-  Sdk,
-} from "../GraphQL/type";
+import { GetContributionsQuery, getSdk, GetUserQuery } from "../GraphQL/type";
 
 // .env ファイルの内容を環境変数に反映
 const token = process.env.NEXT_PUBLIC_MYAPP_GITHUB_TOKEN;
