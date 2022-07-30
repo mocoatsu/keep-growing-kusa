@@ -1,20 +1,18 @@
-import { GetContributionsQuery } from "../infrastructure/GraphQL/type";
-
-type ContributionTodayType = {
+type ContributionYesterdayType = {
   __typename?: "ContributionCalendarDay";
   contributionCount: number;
   date: any;
   weekday: number;
 };
 
-export class ContributionToday {
-  private value: ContributionTodayType;
+export class ContributionYesterday {
+  private value: ContributionYesterdayType;
 
-  constructor(v: ContributionTodayType) {
+  constructor(v: ContributionYesterdayType) {
     this.value = v;
   }
 
-  contributionCount(): number {
+  count(): number {
     return this.value.contributionCount;
   }
 

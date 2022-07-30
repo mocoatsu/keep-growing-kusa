@@ -1,5 +1,3 @@
-import { GetContributionsQuery } from "../infrastructure/GraphQL/type";
-
 type ContributionLastWeekType = Array<{
   __typename?: "ContributionCalendarDay";
   contributionCount: number;
@@ -14,7 +12,7 @@ export class ContributionLastWeek {
     this.value = v;
   }
 
-  countLastWeek() {
+  count() {
     const contributionCountLastWeek = this.value.reduce(
       (sum, contributionsDay) => {
         return sum + contributionsDay.contributionCount;

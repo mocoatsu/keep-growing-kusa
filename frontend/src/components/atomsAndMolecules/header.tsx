@@ -40,7 +40,9 @@ const Header = (props) => {
         spacing={10}
       >
         <Text>マイページ</Text>
+        <Text>活動記録</Text>
         <Text>エンジニア</Text>
+        <Text>フレンド</Text>
       </Stack>
 
       <Box
