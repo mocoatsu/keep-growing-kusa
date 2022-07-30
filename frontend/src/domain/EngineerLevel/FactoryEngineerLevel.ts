@@ -27,5 +27,7 @@ export class FactoryEngineerLevel {
 
     if (contributionsCount < SuperLevel.contributionsCountForLevel)
       return new SuperLevel(contributionsCount);
+
+    return new JuniorLevel(contributionsCount);
   }
 }

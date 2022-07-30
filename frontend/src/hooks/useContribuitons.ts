@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import { ContributionThisWeek } from "../domain/Contribution/ContributionThisWeek";
 import { ContributionToday } from "../domain/Contribution/ContributionToday";
 import { ContributionWeeks } from "../domain/Contribution/ContributionWeeks";
 import { TotalContributions } from "../domain/Contribution/TotalContributions";
@@ -7,7 +8,7 @@ import { contributionsQuery } from "../infrastructure/GraphQL/query";
 
 type ContributionType = {
   contributionToday: ContributionToday;
-  contributionWeeks: ContributionWeeks;
+  contributionThisWeek: ContributionThisWeek;
   totalContributions: TotalContributions;
 };
 
@@ -16,7 +17,7 @@ export const useContribution = (): ContributionType => {
     suspense: true,
   });
 
-  const weekContributions =
+  const ContributionWeeksResponse =
     githubSWRResponse.data?.user?.contributionsCollection.contributionCalendar
       .weeks ?? undefined;
 
@@ -26,9 +27,11 @@ export const useContribution = (): ContributionType => {
 
   return {
     contributionToday: new ContributionWeeks(
-      weekContributions
+      ContributionWeeksResponse
     ).contributionToday(),
-    contributionWeeks: new ContributionWeeks(weekContributions),
+    contributionThisWeek: new ContributionWeeks(
+      ContributionWeeksResponse
+    ).contributionThisWeek(),
     totalContributions: new TotalContributions(totalContributions),
   };
 };

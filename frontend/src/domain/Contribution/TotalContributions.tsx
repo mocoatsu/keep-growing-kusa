@@ -3,4 +3,8 @@ export class TotalContributions {
   constructor(v: number = 0) {
     this.value = v;
   }
+
+  count() {
+    return this.value;
+  }
 }

@@ -1,9 +1,9 @@
-import { ContributionProfile } from "../src/components/organisms/ContributionProfile/ContributionProfile";
+import { MypageTemplate } from "../src/components/template/MypageTemplate";
 
 export function MyPage() {
   return (
     <>
-      <ContributionProfile></ContributionProfile>
+      <MypageTemplate></MypageTemplate>
     </>
   );
 }
