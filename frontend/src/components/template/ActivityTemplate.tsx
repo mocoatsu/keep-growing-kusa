@@ -1,13 +1,13 @@
 import { Suspense } from "react";
-import { ContributionProfileContainer } from "./ContributionProfileContainer";
 import { ErrorBoundary } from "react-error-boundary";
+import { ThisWeekActivityContainer } from "../organisms/ThisWeekActivity/ThisWeekActivityContainer";
 
-export const ContributionProfile = () => {
+export function ActivityTemplate() {
   return (
     <ErrorBoundary fallback={<p>エラー</p>}>
       <Suspense fallback={<div>loading...</div>}>
-        <ContributionProfileContainer></ContributionProfileContainer>
+        <ThisWeekActivityContainer></ThisWeekActivityContainer>
       </Suspense>
     </ErrorBoundary>
   );
-};
+}

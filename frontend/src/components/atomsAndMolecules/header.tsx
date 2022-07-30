@@ -2,15 +2,16 @@ import React from "react";
 import {
   Box,
   Stack,
-  Heading,
   Flex,
   Text,
   Button,
   useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { HeaderLink } from "./Link";
+import { paths } from "../../../constants/paths";
 
-const Header = (props) => {
+const Header = (props: any) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleToggle = () => (isOpen ? onClose() : onOpen());
 
@@ -39,8 +40,9 @@ const Header = (props) => {
         ml={4}
         spacing={10}
       >
-        <Text>マイページ</Text>
-        <Text>活動記録</Text>
+        <HeaderLink href={paths.mypage}>マイページ</HeaderLink>
+        <HeaderLink href={paths.activity}>活動記録</HeaderLink>
+
         <Text>エンジニア</Text>
         <Text>フレンド</Text>
       </Stack>
