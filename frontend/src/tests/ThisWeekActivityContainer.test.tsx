@@ -1,9 +1,10 @@
 import { setupServer } from "msw/node";
 
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { ThisWeekActivityContainer } from "../components/organisms/ThisWeekActivity/ThisWeekActivityContainer";
 
 import { graphql } from "msw";
+import { contributions } from "../mocks/data/contributions";
 
 const server = setupServer();
 
@@ -14,16 +15,11 @@ afterAll(() => server.close());
 test("コントリビューション活動が正しく表示される", async () => {
   server.use(
     graphql.query("getContributions", (req, res, ctx) => {
-      return res(
-        ctx.data({
-          user: {
-            username: "testuser",
-            firstName: "John",
-          },
-        })
-      );
+      return res(ctx.data(contributions()));
     })
   );
 
   render(<ThisWeekActivityContainer />);
+
+  await expect(screen.getByText("Search:")).toBeInTheDocument();
 });
