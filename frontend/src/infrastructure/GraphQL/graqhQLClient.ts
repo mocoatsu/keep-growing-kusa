@@ -1,5 +1,4 @@
 import { GraphQLClient } from "graphql-request";
-import { GetContributionsQuery, getSdk } from "./type";
 
 interface graqhQLArgs {
   endpoint: string;
@@ -13,5 +12,6 @@ export const graqhQLClient = (args: graqhQLArgs): GraphQLClient => {
     authorization: `Bearer ${args.token}`,
     "Content-Type": "application/json",
   };
+
   return new GraphQLClient(args.endpoint, { headers: config });
 };
