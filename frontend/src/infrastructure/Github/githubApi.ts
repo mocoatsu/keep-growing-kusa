@@ -20,6 +20,7 @@ export const fetchContributions = async (): Promise<GetContributionsQuery> => {
     token: new GitHubToken().value,
     variables: variables,
   };
+
   return getSdk(graqhQLClient(args)).getContributions(variables);
 };
 
