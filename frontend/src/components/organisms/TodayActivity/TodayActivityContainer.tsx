@@ -2,10 +2,10 @@ import { useContribution } from "../../../hooks/useContribuitons";
 import { TodayActivityPresenter } from "./TodayActivityPresenter";
 
 export const TodayActivityContainer = () => {
-  const { contributionToday } = useContribution();
+  const { contributionWeeks } = useContribution();
   return (
     <TodayActivityPresenter
-      contributionCount={contributionToday.count()}
+      contributionCount={contributionWeeks.contributionToday().count()}
     ></TodayActivityPresenter>
   );
 };
