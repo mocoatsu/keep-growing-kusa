@@ -1,13 +1,31 @@
 version: '3'
 services:
-  app:
-    build:
-      context: ./docker/app
-      dockerfile: Dockerfile
+  next:
+    build: ./docker/next
     volumes:
       - ./frontend:/usr/app 
       - /etc/passwd:/etc/passwd:ro
-      - /etc/group:/etc/group:ro
-    command:  "yarn run dev"
+      - /etc/group:/etc/group:ro  
     ports:
       - "3000:3000"
+    command: "npm run dev"
+  express:
+    build: ./docker/express
+    volumes:
+      - ./backend:/usr/app 
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro  
+    ports:
+      - "4000:4000"
+    command: >
+        bash -c "npm install &&
+        npm install nodemon -g &&
+        nodemon src/server.ts"
+  db:
+    build: ./docker/db
+    volumes:
+      - ./src/db:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    env_file:
+      - ./backend/.env
