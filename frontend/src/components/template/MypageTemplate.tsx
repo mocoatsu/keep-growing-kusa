@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { EnginnerTitle } from "../organisms/EngineerTitle/EnginnerTitle";
 import { EnginnerTitleContainer } from "../organisms/EngineerTitle/EnginnerTitleContainer";
 
 export function MypageTemplate() {

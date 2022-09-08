@@ -5,9 +5,8 @@ import { EnginnerTitlePresenter } from "./EnginnerTitlePresenter";
 export function EnginnerTitleContainer() {
   const { totalContributions } = useContribution();
 
-  const engineerLevel = FactoryEngineerLevel.enginnerLevelByContributionsCount(
-    totalContributions.count()
-  );
+  const engineerLevel =
+    FactoryEngineerLevel.enginnerLevelByContributionsCount(totalContributions);
 
   return (
     <EnginnerTitlePresenter
