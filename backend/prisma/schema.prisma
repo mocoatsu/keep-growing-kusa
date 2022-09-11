@@ -14,8 +14,9 @@ model Enginner {
 }
 
 model Achievement {
-  id   Int     @id @default(autoincrement())
-  name String? @unique
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String @unique
 }
 
 model UnlockAchievement {
