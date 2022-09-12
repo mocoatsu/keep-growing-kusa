@@ -19,10 +19,11 @@ app
   .get("/", (req, res) => {
     res.send("beautiful World!");
   })
-  .get("/achievements", (req, res) => {
+  .get("/achievements", async (req, res) => {
     const achievementService = new AchievementService(
       new AchievementRepository()
     );
-    const achievements = achievementService.findAll();
+
+    const achievements = await achievementService.findAll();
     res.json(achievements);
   });

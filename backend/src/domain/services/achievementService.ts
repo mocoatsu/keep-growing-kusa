@@ -8,7 +8,7 @@ export class AchievementService {
     this.achievementRepository = achievementRepository;
   }
 
-  findAll(): Promise<Achievement[]> {
-    return this.achievementRepository.findAll();
+  async findAll(): Promise<Achievement[]> {
+    return await this.achievementRepository.findAll();
   }
 }
