@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Enginner {
+  id   Int    @id @default(autoincrement())
+  name String
+  // friend   Friend    @relation(fields: [userId], references: [id])
+}
+
+model Achievement {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String @unique
+}
+
+model UnlockAchievement {
+  id   Int     @id @default(autoincrement())
+  name String? @unique
+}
