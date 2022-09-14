@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import { Achievements } from "../domain/Achievements";
 import { getAllAchievement } from "../infrastructure/express/api";
 
 type AchievementType = {
@@ -13,9 +14,8 @@ export const useAchievements = (): AchievementType => {
       suspense: true,
     }
   );
-  console.log("useAchievements", achievementSWRResponse.data);
 
   return {
-    achievements: achievementSWRResponse.data,
+    achievements: new Achievements(achievementSWRResponse.data),
   };
 };
