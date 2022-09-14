@@ -1,7 +1,7 @@
 import { apiClient } from "./apiClient";
 
-export const getAllAchievement = (params: string) => {
-  return apiClient.get("/achievements/all").then((response) => {
+export const getAllAchievement = (path: string) => {
+  return apiClient.get(path).then((response) => {
     return response.data;
   });
 };
