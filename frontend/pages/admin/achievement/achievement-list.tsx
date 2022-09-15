@@ -1,9 +1,9 @@
-import { AchievementListTemplate } from "../../../src/components/template/admin/achievement/AchievementTemplate";
+import { ListAchievementTemplate } from "../../../src/components/template/admin/achievement/ListAchievementTemplate";
 
 export function AchievementList() {
   return (
     <>
-      <AchievementListTemplate />
+      <ListAchievementTemplate />
     </>
   );
 }

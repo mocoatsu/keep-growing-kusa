@@ -11,7 +11,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-export const AchievementListPresenter = () => {
+export const ListAchievementPresenter = () => {
   return (
     <TableContainer>
       <Table variant="striped" colorScheme="teal">

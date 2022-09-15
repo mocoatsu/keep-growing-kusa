@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { AchievementListContainer } from "../../../organisms/admin/Achievement/AchievementListContainer";
+import { ListAchievementContainer } from "../../../organisms/admin/Achievement/ListAchievementContainer";
 
-export function AchievementListTemplate() {
+export function ListAchievementTemplate() {
   return (
     <ErrorBoundary fallback={<p>エラー</p>}>
       <Suspense fallback={<div>loading...</div>}>
-        <AchievementListContainer />
+        <ListAchievementContainer />
       </Suspense>
     </ErrorBoundary>
   );
