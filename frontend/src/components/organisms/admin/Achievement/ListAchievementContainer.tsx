@@ -1,5 +1,8 @@
+import { useAchievements } from "../../../../hooks/useAchievements";
 import { ListAchievementPresenter } from "./ListAchievementPresenter";
 
 export const ListAchievementContainer = () => {
-  return <ListAchievementPresenter />;
+  const { achievements } = useAchievements();
+
+  return <ListAchievementPresenter achievements={achievements} />;
 };
