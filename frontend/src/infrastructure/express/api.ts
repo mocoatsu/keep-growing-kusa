@@ -5,3 +5,11 @@ export const getAllAchievement = (path: string) => {
     return response.data;
   });
 };
+
+export const deleteAchievement = (achivementId: number) => {
+  return apiClient
+    .delete(`achievements/delete/${achivementId}`)
+    .then((response) => {
+      return response.data;
+    });
+};

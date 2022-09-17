@@ -9,10 +9,13 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  IconButton,
 } from "@chakra-ui/react";
 import { Achievements } from "../../../../domain/Achievements";
 import Link from "next/link";
 import { paths } from "../../../../../constants/paths";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { deleteAchievement } from "../../../../infrastructure/express/api";
 
 export const ListAchievementPresenter = ({
   achievements,
@@ -23,7 +26,7 @@ export const ListAchievementPresenter = ({
     <>
       <Link href={paths.admin.achievement.create}>新規作成</Link>
       <TableContainer>
-        <Table variant="striped" colorScheme="teal">
+        <Table variant="simple" colorScheme="teal">
           <TableCaption>実績</TableCaption>
           <Thead>
             <Tr>
@@ -42,6 +45,20 @@ export const ListAchievementPresenter = ({
                 <Td>{achievement.name}</Td>
                 <Td>{achievement.description}</Td>
                 <Td isNumeric>{achievement.id}</Td>
+                <Td>
+                  <IconButton
+                    aria-label="編集"
+                    icon={<EditIcon />}
+                    onClick={() => {}}
+                  />
+                </Td>
+                <Td>
+                  <IconButton
+                    aria-label="削除"
+                    icon={<DeleteIcon />}
+                    onClick={() => deleteAchievement(achievement.id)}
+                  />
+                </Td>
               </Tr>
             ))}
           </Tbody>

@@ -5,7 +5,7 @@ export type AchievementType = {
 };
 
 export class Achievements {
-  private achievements: AchievementType[];
+  private achievements: AchievementType[] = [];
   constructor(v: AchievementType[]) {
     this.achievements = v;
   }
