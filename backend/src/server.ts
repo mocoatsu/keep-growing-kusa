@@ -34,12 +34,9 @@ app
     );
 
     await achievementApplicationService.create(
-      Achievement.factoryWithoutId(
-        req.body.name,
-        req.body.description,
-        AchievementDifficultyLevel.fromValue(Number(req.body.difficultyLevel))
-          .value
-      )
+      req.body.name,
+      req.body.description,
+      req.body.difficultyLevel
     );
     res.json({ message: "実績の作成に成功しました" });
   })
