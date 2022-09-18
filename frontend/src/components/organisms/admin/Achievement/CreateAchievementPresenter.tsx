@@ -1,44 +1,45 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import {
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Input,
-} from "@chakra-ui/react";
+import { FormControl, FormLabel, Input, HStack } from "@chakra-ui/react";
+
+import { Button } from "../../../atomsAndMolecules/Button";
+import { createAchievement } from "../../../../infrastructure/express/api";
 
 type Inputs = {
-  example: string;
-  exampleRequired: string;
+  name: string;
+  description: string;
+  difficultyLevel: number;
 };
 
 export const CreateAchievementPresenter = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
-  console.log(watch("example")); // watch input value by passing the name of it
+  const onSubmit: SubmitHandler<Inputs> = (v) => createAchievement(v);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormControl>
-        <FormLabel>Email address</FormLabel>
-        <Input type="email" />
-        <FormHelperText>We'll never share your email.</FormHelperText>
-      </FormControl>
-      {/* register your input into the hook by invoking the "register" function */}
-      <input defaultValue="test" {...register("example")} />
+      <HStack>
+        <FormControl>
+          <FormLabel>実績名</FormLabel>
+          <Input type="text" {...register("name")} required />
+        </FormControl>
+        <FormControl>
+          <FormLabel>実績説明</FormLabel>
+          <Input type="text" {...register("description")} required />
+        </FormControl>
+        <FormControl>
+          <FormLabel>実績解除難易度</FormLabel>
+          <Input type="text" {...register("difficultyLevel")} required />
+        </FormControl>
 
-      {/* include validation with required or other standard HTML validation rules */}
-      <input {...register("exampleRequired", { required: true })} />
-      {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
-
-      <input type="submit" />
+        {errors.name && errors.description && errors.difficultyLevel && (
+          <span>入力されていない項目があります</span>
+        )}
+        <Button type="submit">登録</Button>
+      </HStack>
     </form>
   );
 };
