@@ -1,7 +1,8 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { Achievement } from "./achievement";
 import { AchievementId } from "./AchievementId";
 import { IAchievementRepository } from "./iAchievementRepository";
+
 const prisma = new PrismaClient();
 
 export class AchievementRepository implements IAchievementRepository {
@@ -9,8 +10,25 @@ export class AchievementRepository implements IAchievementRepository {
     const instances = await prisma.achievement.findMany();
 
     return instances.map((i) => {
-      return new Achievement(i.id, i.name, i.description);
+      return Achievement.factory(
+        Number(i.id),
+        i.name,
+        i.description,
+        i.difficulty_level
+      );
     });
+  }
+
+  async create(v: Achievement) {
+    const instances = await prisma.achievement.create({
+      data: {
+        name: v.name,
+        description: v.description,
+        difficulty_level: v.difficultyLevel,
+      },
+    });
+
+    return;
   }
 
   async delete(id: AchievementId) {
