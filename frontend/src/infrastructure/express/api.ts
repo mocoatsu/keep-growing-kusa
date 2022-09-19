@@ -1,9 +1,15 @@
+import { AxiosError } from "axios";
 import { apiClient } from "./apiClient";
 
-export const getAllAchievement = (path: string) => {
-  return apiClient.get(path).then((response) => {
-    return response.data;
-  });
+export const getAllAchievement = async (path: string) => {
+  return await apiClient
+    .get(path)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
 };
 
 export const createAchievement = (achievement: {
@@ -19,6 +25,9 @@ export const createAchievement = (achievement: {
     })
     .then((response) => {
       return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
     });
 };
 
@@ -27,5 +36,8 @@ export const deleteAchievement = (achivementId: number) => {
     .delete(`achievements/delete/${achivementId}`)
     .then((response) => {
       return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
     });
 };
