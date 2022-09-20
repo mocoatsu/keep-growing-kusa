@@ -4,8 +4,6 @@ import cors from "cors";
 import { AchievementRepository } from "./domain/models/achievement/achievementRepository";
 import { AchievementId } from "./domain/models/achievement/AchievementId";
 import { AchievementApplicationService } from "./application/achievement/achievementApplicationService";
-import { Achievement } from "./domain/models/achievement/achievement";
-import { AchievementDifficultyLevel } from "./domain/models/achievement/AchievementDifficultyLevel";
 // import { router } from "./presentation/routes";
 const app = express();
 const port = 4000;
@@ -27,6 +25,17 @@ app
     const achievements = await achievementApplicationService.findAll();
 
     res.json(achievements);
+  })
+  .get("/achievements/:id", async (req, res) => {
+    const achievementApplicationService = new AchievementApplicationService(
+      new AchievementRepository()
+    );
+
+    const achievement = await achievementApplicationService.findById(
+      Number(req.params.id)
+    );
+
+    res.json(achievement);
   })
   .post("/achievements/create", async (req, res) => {
     const achievementApplicationService = new AchievementApplicationService(

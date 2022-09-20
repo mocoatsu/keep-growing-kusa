@@ -1,8 +1,4 @@
-export type AchievementType = {
-  id: number;
-  name: string;
-  description: string;
-};
+import { AchievementType } from "./Achievement";
 
 export class Achievements {
   private achievements: AchievementType[] = [];

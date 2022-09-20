@@ -6,6 +6,24 @@ import { IAchievementRepository } from "./iAchievementRepository";
 const prisma = new PrismaClient();
 
 export class AchievementRepository implements IAchievementRepository {
+  async findByPk(pk: AchievementId) {
+    const instance = await prisma.achievement.findUnique({
+      where: {
+        id: pk.value(),
+      },
+    });
+    if (!instance) {
+      throw new Error("Invalid Achievement Id");
+    }
+
+    return Achievement.factory(
+      instance.id,
+      instance.name,
+      instance.description,
+      instance.difficulty_level
+    );
+  }
+
   async findAll() {
     const instances = await prisma.achievement.findMany();
 

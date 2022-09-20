@@ -12,6 +12,28 @@ export const getAllAchievement = async (path: string) => {
     });
 };
 
+export const getAchievementById = async (achivementId: String) => {
+  return await apiClient
+    .get(`/achievements/${achivementId}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};
+
+export const editAchievementById = async (achivementId: Number) => {
+  return await apiClient
+    .get(`/achievements/edit/${achivementId}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};
+
 export const createAchievement = (achievement: {
   name: string;
   description: string;

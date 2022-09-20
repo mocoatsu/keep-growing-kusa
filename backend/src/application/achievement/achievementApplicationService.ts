@@ -10,6 +10,10 @@ export class AchievementApplicationService {
     this.achievementRepository = achievementRepository;
   }
 
+  async findById(id: number): Promise<Achievement> {
+    return await this.achievementRepository.findByPk(new AchievementId(id));
+  }
+
   async findAll(): Promise<Achievement[]> {
     return await this.achievementRepository.findAll();
   }

@@ -3,7 +3,6 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
@@ -51,6 +50,7 @@ export const ListAchievementPresenter = ({
                     icon={<EditIcon />}
                     onClick={() => {}}
                   />
+                  <Link href={`${achievement.id}`}>編集</Link>
                 </Td>
                 <Td>
                   <IconButton
@@ -62,14 +62,6 @@ export const ListAchievementPresenter = ({
               </Tr>
             ))}
           </Tbody>
-          <Tfoot>
-            <Tr>
-              <Th>To convert</Th>
-              <Th>into</Th>
-              <Th>into</Th>
-              <Th isNumeric>multiply by</Th>
-            </Tr>
-          </Tfoot>
         </Table>
       </TableContainer>
     </>
