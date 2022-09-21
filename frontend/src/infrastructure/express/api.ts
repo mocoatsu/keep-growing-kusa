@@ -1,5 +1,10 @@
 import { AxiosError } from "axios";
 import { apiClient } from "./apiClient";
+export type RequestAchievement = {
+  name: string;
+  description: string;
+  difficultyLevel: number;
+};
 
 export const getAllAchievement = async (path: string) => {
   return await apiClient
@@ -23,9 +28,12 @@ export const getAchievementById = async (achivementId: String) => {
     });
 };
 
-export const editAchievementById = async (achivementId: Number) => {
+export const editAchievementById = async (
+  achivementId: Number,
+  params: RequestAchievement
+) => {
   return await apiClient
-    .get(`/achievements/edit/${achivementId}`)
+    .put(`/achievements/edit/${achivementId}`, params)
     .then((response) => {
       return response.data;
     })
