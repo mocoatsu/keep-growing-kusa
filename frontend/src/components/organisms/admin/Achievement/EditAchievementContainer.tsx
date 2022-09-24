@@ -1,10 +1,12 @@
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useAchievementById } from "../../../../hooks/useAchievementById";
 import {
   editAchievementById,
   RequestAchievement,
 } from "../../../../infrastructure/express/api";
+
 import { EditAchievementPresenter } from "./EditAchievementPresenter";
 
 export const EditAchievementContainer = () => {
@@ -13,7 +15,7 @@ export const EditAchievementContainer = () => {
     router.query.id as string | undefined
   );
 
-  const { handleSubmit, control } = useForm<RequestAchievement>({
+  const { handleSubmit, register, reset } = useForm<RequestAchievement>({
     defaultValues: {
       name: achievement.name,
       description: achievement.description,
@@ -22,8 +24,17 @@ export const EditAchievementContainer = () => {
     mode: "onChange",
   });
 
-  const onSubmit = (v: RequestAchievement) =>
-    editAchievementById(achievement.id, v);
+  useEffect(() => {
+    reset(achievement);
+  }, [achievement.id]);
 
-  return <EditAchievementPresenter achievement={achievement} />;
+  const onSubmit = (v: RequestAchievement) =>
+    achievement.id ? editAchievementById(achievement.id, v) : "";
+  return (
+    <EditAchievementPresenter
+      handleSubmit={handleSubmit}
+      register={register}
+      onSubmit={onSubmit}
+    />
+  );
 };

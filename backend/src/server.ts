@@ -49,6 +49,20 @@ app
     );
     res.json({ message: "実績の作成に成功しました" });
   })
+  .put("/achievements/edit/:id", async (req, res) => {
+    const achievementApplicationService = new AchievementApplicationService(
+      new AchievementRepository()
+    );
+
+    await achievementApplicationService.update(
+      Number(req.params.id),
+      req.body.name,
+      req.body.description,
+      req.body.difficultyLevel
+    );
+
+    res.json({ message: "実績の更新に成功しました" });
+  })
   .delete("/achievements/delete/:id", async (req, res) => {
     const achievementApplicationService = new AchievementApplicationService(
       new AchievementRepository()

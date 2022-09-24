@@ -31,6 +31,21 @@ export class AchievementApplicationService {
     return await this.achievementRepository.create(achievement);
   }
 
+  async update(
+    id: number,
+    name: string,
+    description: string,
+    difficultyLevel: number
+  ): Promise<void> {
+    const achievement = Achievement.factory(
+      id,
+      name,
+      description,
+      difficultyLevel
+    );
+    return await this.achievementRepository.update(achievement);
+  }
+
   async delete(id: AchievementId): Promise<void> {
     return await this.achievementRepository.delete(id);
   }

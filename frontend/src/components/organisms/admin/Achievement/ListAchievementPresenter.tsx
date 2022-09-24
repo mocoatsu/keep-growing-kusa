@@ -43,7 +43,7 @@ export const ListAchievementPresenter = ({
                 <Td>{achievement.id}</Td>
                 <Td>{achievement.name}</Td>
                 <Td>{achievement.description}</Td>
-                <Td isNumeric>{achievement.id}</Td>
+                <Td isNumeric>{achievement.difficultyLevel}</Td>
                 <Td>
                   <IconButton
                     aria-label="編集"
