@@ -54,14 +54,14 @@ app
       new AchievementRepository()
     );
 
-    await achievementApplicationService.update(
+    const achievement = await achievementApplicationService.update(
       Number(req.params.id),
       req.body.name,
       req.body.description,
-      req.body.difficultyLevel
+      Number(req.body.difficultyLevel)
     );
 
-    res.json({ message: "実績の更新に成功しました" });
+    res.json(achievement);
   })
   .delete("/achievements/delete/:id", async (req, res) => {
     const achievementApplicationService = new AchievementApplicationService(

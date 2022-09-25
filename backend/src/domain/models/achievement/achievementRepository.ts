@@ -49,17 +49,24 @@ export class AchievementRepository implements IAchievementRepository {
     return;
   }
 
-  async update(achievement: Achievement): Promise<void> {
+  async update(achievement: Achievement): Promise<Achievement> {
     if (achievement.id === null) throw Error("no achievement id");
 
-    const instances = await prisma.achievement.update({
+    const instance = await prisma.achievement.update({
       where: { id: achievement.id },
       data: {
         name: achievement.name,
+        description: achievement.description,
+        difficulty_level: achievement.difficultyLevel,
       },
     });
 
-    return;
+    return Achievement.factory(
+      instance.id,
+      instance.name,
+      instance.description,
+      instance.difficulty_level
+    );
   }
 
   async delete(id: AchievementId) {

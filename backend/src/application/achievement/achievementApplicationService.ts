@@ -36,7 +36,7 @@ export class AchievementApplicationService {
     name: string,
     description: string,
     difficultyLevel: number
-  ): Promise<void> {
+  ): Promise<Achievement> {
     const achievement = Achievement.factory(
       id,
       name,
