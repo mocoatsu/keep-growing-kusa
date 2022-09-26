@@ -7,6 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+<<<<<<< HEAD
 model Enginners {
   id                Int                 @id @default(autoincrement())
   name              String
@@ -28,4 +29,21 @@ model UnlockAchievement {
   enginner_id    Int
   Achievement    Achievement @relation(fields: [achievement_id], references: [id])
   Engineer       Enginners   @relation(fields: [enginner_id], references: [id])
+=======
+model Enginner {
+  id   Int    @id @default(autoincrement())
+  name String
+  // friend   Friend    @relation(fields: [userId], references: [id])
+}
+
+model Achievement {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String @unique
+}
+
+model UnlockAchievement {
+  id   Int     @id @default(autoincrement())
+  name String? @unique
+>>>>>>> f7b98bf719ee163822d2d06af750b87659f1b211
 }
