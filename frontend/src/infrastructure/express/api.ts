@@ -71,3 +71,14 @@ export const deleteAchievement = (achivementId: number) => {
       throw Error(e.message);
     });
 };
+
+export const fetchContributions = (useId: number) => {
+  return apiClient
+    .get(`contributions`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};

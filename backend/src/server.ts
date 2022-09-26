@@ -4,6 +4,7 @@ import cors from "cors";
 import { AchievementRepository } from "./domain/models/achievement/achievementRepository";
 import { AchievementId } from "./domain/models/achievement/AchievementId";
 import { AchievementApplicationService } from "./application/achievement/achievementApplicationService";
+import { ContributionApplicationService } from "./application/contributions/contributionApplicationService";
 // import { router } from "./presentation/routes";
 const app = express();
 const port = 4000;
@@ -71,5 +72,13 @@ app
     await achievementApplicationService.delete(
       new AchievementId(req.params.id)
     );
+    res.json({ message: "実績の削除に成功しました" });
+  })
+  .get("/contributions", async (req, res) => {
+    const contributionApplicationService = new ContributionApplicationService();
+
+    const contributions =
+      await contributionApplicationService.fetchContributions();
+
     res.json({ message: "実績の削除に成功しました" });
   });
