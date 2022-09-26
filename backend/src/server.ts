@@ -1,6 +1,9 @@
 import express from "express";
+import cors from "cors";
+
 import { AchievementRepository } from "./domain/models/achievement/achievementRepository";
-import { AchievementService } from "./domain/services/achievementService";
+import { AchievementId } from "./domain/models/achievement/AchievementId";
+import { AchievementApplicationService } from "./application/achievement/achievementApplicationService";
 // import { router } from "./presentation/routes";
 const app = express();
 const port = 4000;
@@ -10,20 +13,63 @@ app.listen(port, () => {
 });
 
 const router = express.Router();
-// router
+
 app
-  .use((req, res, next) => {
-    console.log("Time: ", Date.now());
-    next();
-  })
-  .get("/", (req, res) => {
-    res.send("beautiful World!");
-  })
-  .get("/achievements", async (req, res) => {
-    const achievementService = new AchievementService(
+  .use(cors())
+  .use(express.json())
+  .get("/achievements/all", async (req, res) => {
+    const achievementApplicationService = new AchievementApplicationService(
       new AchievementRepository()
     );
 
-    const achievements = await achievementService.findAll();
+    const achievements = await achievementApplicationService.findAll();
+
     res.json(achievements);
+  })
+  .get("/achievements/:id", async (req, res) => {
+    const achievementApplicationService = new AchievementApplicationService(
+      new AchievementRepository()
+    );
+
+    const achievement = await achievementApplicationService.findById(
+      Number(req.params.id)
+    );
+
+    res.json(achievement);
+  })
+  .post("/achievements/create", async (req, res) => {
+    const achievementApplicationService = new AchievementApplicationService(
+      new AchievementRepository()
+    );
+
+    await achievementApplicationService.create(
+      req.body.name,
+      req.body.description,
+      req.body.difficultyLevel
+    );
+    res.json({ message: "実績の作成に成功しました" });
+  })
+  .put("/achievements/edit/:id", async (req, res) => {
+    const achievementApplicationService = new AchievementApplicationService(
+      new AchievementRepository()
+    );
+
+    const achievement = await achievementApplicationService.update(
+      Number(req.params.id),
+      req.body.name,
+      req.body.description,
+      Number(req.body.difficultyLevel)
+    );
+
+    res.json(achievement);
+  })
+  .delete("/achievements/delete/:id", async (req, res) => {
+    const achievementApplicationService = new AchievementApplicationService(
+      new AchievementRepository()
+    );
+
+    await achievementApplicationService.delete(
+      new AchievementId(req.params.id)
+    );
+    res.json({ message: "実績の削除に成功しました" });
   });
