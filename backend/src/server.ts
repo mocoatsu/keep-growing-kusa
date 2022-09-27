@@ -10,8 +10,6 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-const router = express.Router();
-
 app
   .use(cors())
   .use(express.json())

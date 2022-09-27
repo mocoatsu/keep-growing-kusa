@@ -1,14 +1,10 @@
 import useSWR from "swr";
-import { Achievement } from "../domain/Achievement";
 import { getAchievementById } from "../infrastructure/express/api";
-
-type AchievementType = {
-  achievement: Achievement;
-};
+import { Achievement } from "./useAchievements";
 
 export const useAchievementById = (
   achievementId: string | undefined
-): AchievementType => {
+): { achievement: Achievement } => {
   const achievementSWRResponse = useSWR(
     achievementId ? [achievementId] : null,
     getAchievementById,
@@ -18,6 +14,6 @@ export const useAchievementById = (
   );
 
   return {
-    achievement: new Achievement(achievementSWRResponse.data),
+    achievement: achievementSWRResponse.data,
   };
 };

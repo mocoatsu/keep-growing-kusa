@@ -10,16 +10,16 @@ import {
   TableContainer,
   IconButton,
 } from "@chakra-ui/react";
-import { Achievements } from "../../../../domain/Achievements";
 import Link from "next/link";
 import { paths } from "../../../../../constants/paths";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { deleteAchievement } from "../../../../infrastructure/express/api";
+import { Achievement } from "../../../../hooks/useAchievements";
 
 export const ListAchievementPresenter = ({
   achievements,
 }: {
-  achievements: Achievements;
+  achievements: Achievement[];
 }) => {
   return (
     <>
@@ -38,7 +38,7 @@ export const ListAchievementPresenter = ({
             </Tr>
           </Thead>
           <Tbody>
-            {achievements.value().map((achievement) => (
+            {achievements.map((achievement) => (
               <Tr key={achievement.id}>
                 <Td>{achievement.id}</Td>
                 <Td>{achievement.name}</Td>

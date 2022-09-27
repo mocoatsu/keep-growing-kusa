@@ -1,12 +1,18 @@
 import useSWR from "swr";
-import { Achievements } from "../domain/Achievements";
 import { getAllAchievement } from "../infrastructure/express/api";
 
-type AchievementType = {
-  achievements: any;
+export type Achievement = {
+  id: number;
+  name: string;
+  description: string;
+  difficultyLevel: number;
 };
 
-export const useAchievements = (): AchievementType => {
+export type Achievements = {
+  achievements: Achievement[];
+};
+
+export const useAchievements = (): Achievements => {
   const achievementSWRResponse = useSWR(
     "/achievements/all",
     getAllAchievement,
@@ -16,6 +22,6 @@ export const useAchievements = (): AchievementType => {
   );
 
   return {
-    achievements: new Achievements(achievementSWRResponse.data),
+    achievements: achievementSWRResponse.data,
   };
 };

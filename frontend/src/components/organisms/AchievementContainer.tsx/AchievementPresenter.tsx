@@ -1,14 +1,14 @@
-import { Achievements } from "../../../domain/Achievements";
+import { Achievement } from "../../../hooks/useAchievements";
 import { Card } from "../../atomsAndMolecules/Card";
 
 export const AchievementPresenter = ({
   achievements,
 }: {
-  achievements: Achievements;
+  achievements: Achievement[];
 }) => {
   return (
     <>
-      {achievements.value().map((achievement) => (
+      {achievements.map((achievement) => (
         <Card
           key=""
           label={achievement.name}
