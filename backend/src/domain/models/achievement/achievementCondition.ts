@@ -1,3 +1,5 @@
+import { UnlockAchievementMaterial } from "../unlockAchievementMaterial/unlockAchievementMaterial";
+
 // 実績条件
 export class AchievementCondition {
   private static readonly _valueToinstanceMap = new Map<
@@ -12,7 +14,9 @@ export class AchievementCondition {
 
   private constructor(
     public readonly id: number,
-    public readonly condition: () => boolean
+    public readonly condition: (
+      unlockAchievementMaterial: UnlockAchievementMaterial
+    ) => boolean
   ) {
     AchievementCondition._valueToinstanceMap.set(id, this);
   }
@@ -25,11 +29,15 @@ export class AchievementCondition {
     return instance;
   }
 
-  isFullfilled(): boolean {
-    return this.condition();
+  isFullfilled(unlockAchievementMaterial: UnlockAchievementMaterial): boolean {
+    return this.condition(unlockAchievementMaterial);
   }
 
-  private static firstContribution() {
-    return true;
+  private static firstContribution(
+    unlockAchievementMaterial: UnlockAchievementMaterial
+  ) {
+    return Boolean(
+      unlockAchievementMaterial.contributions.contributionThisWeek()
+    );
   }
 }
