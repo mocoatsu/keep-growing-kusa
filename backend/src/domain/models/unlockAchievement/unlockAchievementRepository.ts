@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { UnlockAchievements } from "../achievement copy/UnlockAchievements";
 import { AchievementId } from "../achievement/AchievementId";
 import { EngineerId } from "../enginner/engineerId";
 import { IUnlockAchievementRepository } from "./iUnlockAchievementRepository";
@@ -17,13 +18,15 @@ export class UnlockAchievementRepository
       },
     });
 
-    return instances.map((i) => {
+    const unlockAchievements = instances.map((i) => {
       return UnlockAchievement.factory(
         new UnlockAchievementId(i.id),
         new AchievementId(i.achievement_id),
         new EngineerId(i.enginner_id)
       );
     });
+
+    return new UnlockAchievements(unlockAchievements);
   }
 
   async save(v: UnlockAchievement) {
