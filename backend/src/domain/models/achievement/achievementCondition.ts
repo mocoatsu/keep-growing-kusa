@@ -1,4 +1,5 @@
 import { UnlockAchievementMaterial } from "../unlockAchievementMaterial/unlockAchievementMaterial";
+import { AchievementId } from "./AchievementId";
 
 // 実績条件
 export class AchievementCondition {
@@ -21,8 +22,8 @@ export class AchievementCondition {
     AchievementCondition._valueToinstanceMap.set(id, this);
   }
 
-  static fromId(v: number) {
-    const instance = AchievementCondition._valueToinstanceMap.get(v);
+  static fromId(v: AchievementId) {
+    const instance = AchievementCondition._valueToinstanceMap.get(v.value());
     if (!instance) {
       throw new Error(`${v} is Invalid AchievementCondition Id`);
     }

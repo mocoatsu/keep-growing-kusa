@@ -1,11 +1,13 @@
+import { AchievementId } from "./AchievementId";
+
 export class Achievement {
-  readonly id: number | null;
+  readonly id: AchievementId | null;
   readonly name: string;
   readonly description: string;
   readonly difficultyLevel: number;
 
   constructor(
-    id: number | null,
+    id: AchievementId | null,
     name: string,
     description: string,
     difficultyLevel: number
@@ -28,7 +30,7 @@ export class Achievement {
   }
 
   static factory(
-    id: number,
+    id: AchievementId,
     name: string,
     description: string,
     difficultyLevel: number

@@ -1,6 +1,7 @@
 import { Achievement } from "../../domain/models/achievement/achievement";
 import { AchievementDifficultyLevel } from "../../domain/models/achievement/AchievementDifficultyLevel";
 import { AchievementId } from "../../domain/models/achievement/AchievementId";
+import { Achievements } from "../../domain/models/achievement/Achievements";
 import { IAchievementRepository } from "../../domain/models/achievement/iAchievementRepository";
 
 export class AchievementApplicationService {
@@ -14,7 +15,7 @@ export class AchievementApplicationService {
     return await this.achievementRepository.findByPk(new AchievementId(id));
   }
 
-  async findAll(): Promise<Achievement[]> {
+  async findAll(): Promise<Achievements> {
     return await this.achievementRepository.findAll();
   }
 
@@ -38,7 +39,7 @@ export class AchievementApplicationService {
     difficultyLevel: number
   ): Promise<Achievement> {
     const achievement = Achievement.factory(
-      id,
+      new AchievementId(id),
       name,
       description,
       difficultyLevel
@@ -49,4 +50,6 @@ export class AchievementApplicationService {
   async delete(id: AchievementId): Promise<void> {
     return await this.achievementRepository.delete(id);
   }
+
+  unlockAchievements() {}
 }

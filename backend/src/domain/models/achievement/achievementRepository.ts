@@ -18,7 +18,7 @@ export class AchievementRepository implements IAchievementRepository {
     }
 
     return Achievement.factory(
-      instance.id,
+      new AchievementId(instance.id),
       instance.name,
       instance.description,
       instance.difficulty_level
@@ -30,7 +30,7 @@ export class AchievementRepository implements IAchievementRepository {
 
     const achievements = instances.map((i) => {
       return Achievement.factory(
-        Number(i.id),
+        new AchievementId(i.id),
         i.name,
         i.description,
         i.difficulty_level
@@ -56,7 +56,7 @@ export class AchievementRepository implements IAchievementRepository {
     if (achievement.id === null) throw Error("no achievement id");
 
     const instance = await prisma.achievement.update({
-      where: { id: achievement.id },
+      where: { id: achievement.id.value() },
       data: {
         name: achievement.name,
         description: achievement.description,
@@ -65,7 +65,7 @@ export class AchievementRepository implements IAchievementRepository {
     });
 
     return Achievement.factory(
-      instance.id,
+      new AchievementId(instance.id),
       instance.name,
       instance.description,
       instance.difficulty_level

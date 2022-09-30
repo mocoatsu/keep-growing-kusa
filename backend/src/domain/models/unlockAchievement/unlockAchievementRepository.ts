@@ -29,8 +29,9 @@ export class UnlockAchievementRepository
     return new UnlockAchievements(unlockAchievements);
   }
 
-  async save(v: UnlockAchievement) {
-    const instances = await prisma.unlockAchievement.create({
+  async save(v: UnlockAchievements) {
+    const saved = v.value().map(() => {achievement_id:});
+    const instances = await prisma.unlockAchievement.createMany({
       data: {
         achievement_id: v.achievementId.value(),
         enginner_id: v.enginnerId.value(),

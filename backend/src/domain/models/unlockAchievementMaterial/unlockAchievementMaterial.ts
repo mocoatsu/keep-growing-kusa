@@ -1,9 +1,15 @@
 import { ContributionWeeks } from "../contribution/ContributionWeeks";
 
+type Materials = {
+  contributions: {
+    contributionWeeks: ContributionWeeks;
+    total: number;
+  };
+};
 export class UnlockAchievementMaterial {
-  public readonly contributions: ContributionWeeks;
+  public readonly contributions: Materials;
 
-  constructor(contributions: ContributionWeeks) {
+  constructor(contributions: Materials) {
     this.contributions = contributions;
   }
 }
