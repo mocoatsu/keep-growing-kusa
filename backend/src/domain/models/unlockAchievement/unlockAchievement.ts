@@ -1,40 +1,40 @@
 import { AchievementId } from "../achievement/AchievementId";
-import { EngineerId } from "../enginner/engineerId";
+import { EngineerId } from "../engineer/engineerId";
 import { UnlockAchievementId } from "./unlockAchievementId";
 
 export class UnlockAchievement {
   readonly id: UnlockAchievementId | null;
   readonly achievementId: AchievementId;
-  readonly enginnerId: EngineerId;
+  readonly engineerId: EngineerId;
 
   constructor(
     id: UnlockAchievementId | null,
     achievementId: AchievementId,
-    enginnerId: EngineerId
+    engineerId: EngineerId
   ) {
     if (achievementId === null) {
       throw new Error("正しくない実績IDです");
     }
-    if (enginnerId === null) {
+    if (engineerId === null) {
       throw new Error("正しくないエンジニアIDです");
     }
     this.id = id;
     this.achievementId = achievementId;
-    this.enginnerId = enginnerId;
+    this.engineerId = engineerId;
   }
 
   static factoryWithoutId(
     achievementId: AchievementId,
-    enginner_id: EngineerId
+    engineer_id: EngineerId
   ) {
-    return new UnlockAchievement(null, achievementId, enginner_id);
+    return new UnlockAchievement(null, achievementId, engineer_id);
   }
 
   static factory(
     id: UnlockAchievementId,
     achievementId: AchievementId,
-    enginner_id: EngineerId
+    engineer_id: EngineerId
   ) {
-    return new UnlockAchievement(id, achievementId, enginner_id);
+    return new UnlockAchievement(id, achievementId, engineer_id);
   }
 }

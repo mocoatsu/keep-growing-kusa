@@ -1,15 +1,15 @@
 export class EngineerId {
-  private enginnerId: number;
+  private engineerId: number;
 
   constructor(v: number) {
     const id = Number(v);
     if (v <= 0) {
       throw new Error("エンジニアIDが正しくありません");
     }
-    this.enginnerId = id;
+    this.engineerId = id;
   }
 
   value() {
-    return this.enginnerId;
+    return this.engineerId;
   }
 }

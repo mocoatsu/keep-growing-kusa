@@ -11,7 +11,7 @@ export type EngineerLevel = {
 };
 
 export class FactoryEngineerLevel {
-  static enginnerLevelByContributionsCount(contributionsCount: number) {
+  static engineerLevelByContributionsCount(contributionsCount: number) {
     // TODO:順番が入れ替わると返される区分オブジェクトが変わるロジックの改善
     if (contributionsCount < JuniorLevel.contributionsCountForLevel)
       return new JuniorLevel(contributionsCount);
