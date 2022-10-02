@@ -1,7 +1,8 @@
-import { UnlockAchievementId } from "../unlockAchievement/unlockAchievementId";
+import { UnlockAchievementId as UnlockAchievements } from "../unlockAchievement/unlockAchievementId";
+import { UnlockAchievementIds } from "../unlockAchievement/unlockAchievementIds";
 import { UnlockAchievementMaterial } from "../unlockAchievementMaterial/unlockAchievementMaterial";
-import { Achievement } from "./achievement";
-import { AchievementCondition } from "./achievementCondition";
+import { Achievement } from "./Achievement";
+import { AchievementCondition } from "./AchievementCondition";
 import { AchievementId } from "./AchievementId";
 
 export class Achievements {
@@ -15,20 +16,20 @@ export class Achievements {
   }
 
   // 解除されていない実績のみ取得
-  locked(unlockAchievementIds: UnlockAchievementId[]): Achievements {
+  locked(unlockAchievementIds: UnlockAchievementIds): Achievements {
     const lockedAchievement = this.achievements.filter((achievement) => {
       if (achievement.id === null) {
-        throw new Error("invalid achievement id exists ");
+        throw new Error("invalid achievement id exists");
       }
 
-      return !(achievement.id.value() in unlockAchievementIds);
+      return !unlockAchievementIds.toNumber().includes(achievement.id.value());
     });
 
     return new Achievements(lockedAchievement);
   }
 
   // 解除された実績のみ取得
-  unlocked(unlockAchievementIds: UnlockAchievementId[]): Achievements {
+  unlocked(unlockAchievementIds: UnlockAchievements[]): Achievements {
     const unlockedAchievements = this.achievements.filter((achievement) => {
       if (achievement.id === null) {
         throw new Error("invalid achievement id exists ");
@@ -42,7 +43,7 @@ export class Achievements {
   filledCondition(unlockAchievementMaterial: UnlockAchievementMaterial) {
     const filledAchievements = this.achievements.filter((achievement) => {
       if (achievement.id === null) {
-        throw new Error("invalid achievement id exists ");
+        throw new Error("invalid achievement id included");
       }
 
       const condition = AchievementCondition.fromId(achievement.id);
@@ -50,7 +51,7 @@ export class Achievements {
       return condition.isFullfilled(unlockAchievementMaterial);
     });
 
-    return filledAchievements;
+    return new Achievements(filledAchievements);
   }
 
   ids(): AchievementId[] {

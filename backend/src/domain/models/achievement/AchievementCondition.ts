@@ -13,6 +13,11 @@ export class AchievementCondition {
     this.firstContribution
   );
 
+  public static readonly FIRST_FRIEND = new AchievementCondition(
+    2,
+    this.firstFriend
+  );
+
   private constructor(
     public readonly id: number,
     public readonly condition: (
@@ -21,8 +26,7 @@ export class AchievementCondition {
   ) {
     AchievementCondition._valueToinstanceMap.set(id, this);
   }
-
-  static fromId(v: AchievementId) {
+  static fromId(v: AchievementId): AchievementCondition {
     const instance = AchievementCondition._valueToinstanceMap.get(v.value());
     if (!instance) {
       throw new Error(`${v} is Invalid AchievementCondition Id`);
@@ -37,8 +41,10 @@ export class AchievementCondition {
   private static firstContribution(
     unlockAchievementMaterial: UnlockAchievementMaterial
   ) {
-    return Boolean(
-      unlockAchievementMaterial.contributions.contributionThisWeek()
-    );
+    return unlockAchievementMaterial.contributions.contributions.total >= 1;
+  }
+
+  private static firstFriend() {
+    return true;
   }
 }
