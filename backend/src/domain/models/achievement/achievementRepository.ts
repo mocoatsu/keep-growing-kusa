@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { Achievement } from "./achievement";
+import { Achievement } from "./Achievement";
 import { AchievementId } from "./AchievementId";
 import { Achievements } from "./Achievements";
 import { IAchievementRepository } from "./iAchievementRepository";

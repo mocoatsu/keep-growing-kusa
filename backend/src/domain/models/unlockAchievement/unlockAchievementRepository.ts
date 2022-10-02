@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { UnlockAchievements } from "../achievement copy/UnlockAchievements";
+import { UnlockAchievements } from "./UnlockAchievements";
 import { AchievementId } from "../achievement/AchievementId";
-import { EngineerId } from "../enginner/engineerId";
+import { EngineerId } from "../engineer/engineerId";
 import { IUnlockAchievementRepository } from "./iUnlockAchievementRepository";
 import { UnlockAchievement } from "./unlockAchievement";
 import { UnlockAchievementId } from "./unlockAchievementId";
@@ -11,10 +11,10 @@ const prisma = new PrismaClient();
 export class UnlockAchievementRepository
   implements IUnlockAchievementRepository
 {
-  async findEntitiesByEnginnerId(enginnerId: EngineerId) {
+  async findEntitiesByEngineerId(engineerId: EngineerId) {
     const instances = await prisma.unlockAchievement.findMany({
       where: {
-        enginner_id: enginnerId.value(),
+        engineer_id: engineerId.value(),
       },
     });
 
@@ -22,20 +22,23 @@ export class UnlockAchievementRepository
       return UnlockAchievement.factory(
         new UnlockAchievementId(i.id),
         new AchievementId(i.achievement_id),
-        new EngineerId(i.enginner_id)
+        new EngineerId(i.engineer_id)
       );
     });
 
     return new UnlockAchievements(unlockAchievements);
   }
 
-  async save(v: UnlockAchievements) {
-    const saved = v.value().map(() => {achievement_id:});
-    const instances = await prisma.unlockAchievement.createMany({
-      data: {
+  async save(unlockAchievements: UnlockAchievements) {
+    const unlockAchievementEntities = unlockAchievements.value().map((v) => {
+      return {
         achievement_id: v.achievementId.value(),
-        enginner_id: v.enginnerId.value(),
-      },
+        engineer_id: v.engineerId.value(),
+      };
+    });
+
+    const instances = await prisma.unlockAchievement.createMany({
+      data: unlockAchievementEntities,
     });
 
     return;

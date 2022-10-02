@@ -1,5 +1,7 @@
-import { UnlockAchievementId as UnlockAchievements } from "../unlockAchievement/unlockAchievementId";
+import { EngineerId } from "../engineer/engineerId";
+import { UnlockAchievement } from "../unlockAchievement/unlockAchievement";
 import { UnlockAchievementIds } from "../unlockAchievement/unlockAchievementIds";
+import { UnlockAchievements } from "../unlockAchievement/UnlockAchievements";
 import { UnlockAchievementMaterial } from "../unlockAchievementMaterial/unlockAchievementMaterial";
 import { Achievement } from "./Achievement";
 import { AchievementCondition } from "./AchievementCondition";
@@ -61,5 +63,15 @@ export class Achievements {
     return ids.filter((id): id is NonNullable<typeof id> => {
       return id !== null;
     });
+  }
+
+  toUnlockAchievements(engineerId: EngineerId) {
+    const unlockAchievements = this.achievements.map((v) => {
+      if (v.id === null) throw Error(`無効なID${v.id}`);
+
+      return new UnlockAchievement(null, v.id, engineerId);
+    });
+
+    return new UnlockAchievements(unlockAchievements);
   }
 }

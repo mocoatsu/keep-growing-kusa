@@ -1,4 +1,4 @@
-import { Achievement } from "../../domain/models/achievement/achievement";
+import { Achievement } from "../../domain/models/achievement/Achievement";
 import { AchievementDifficultyLevel } from "../../domain/models/achievement/AchievementDifficultyLevel";
 import { AchievementId } from "../../domain/models/achievement/AchievementId";
 import { Achievements } from "../../domain/models/achievement/Achievements";
