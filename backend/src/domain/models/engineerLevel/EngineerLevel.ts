@@ -29,7 +29,10 @@ export class EngineerLevel {
     new EngineerTitle("世界的なスーバーエンジニア")
   );
 
-  private constructor(level: number, title: EngineerTitle) {
+  private constructor(
+    public readonly level: number,
+    public readonly title: EngineerTitle
+  ) {
     EngineerLevel._valueToinstanceMap.set(level, this);
   }
 
@@ -50,6 +53,6 @@ export class EngineerLevel {
 
     if (contributionsCount < 5000) return this.LEADER_LEVEL;
 
-    this.SUPER_LEVEL;
+    return this.SUPER_LEVEL;
   }
 }
