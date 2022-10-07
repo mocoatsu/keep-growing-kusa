@@ -2,6 +2,7 @@ export const paths = {
   mypage: "/mypage",
   activity: "/activity",
   achievement: "/achievement",
+  login: "/login",
   admin: {
     index: "/admin/dashboard",
     achievement: {

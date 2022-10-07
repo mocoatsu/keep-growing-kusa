@@ -44,6 +44,7 @@ const Header = (props: any) => {
         <HeaderLink href={paths.activity}>活動記録</HeaderLink>
         <HeaderLink href={paths.achievement}>実績</HeaderLink>
         <HeaderLink href={paths.admin.index}>管理</HeaderLink>
+        <HeaderLink href={paths.login}>ログイン</HeaderLink>
 
         <Text>エンジニア</Text>
         <Text>フレンド</Text>
