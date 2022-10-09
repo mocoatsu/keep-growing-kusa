@@ -1,9 +1,40 @@
 import { AxiosError } from "axios";
 import { apiClient } from "./apiClient";
+
+export type RequestAuth = {
+  name: string;
+  password: string;
+};
+
 export type RequestAchievement = {
   name: string;
   description: string;
   difficultyLevel: number;
+};
+
+export const signup = async (form: RequestAuth) => {
+  return await apiClient
+    .post("/signup", {
+      name: form.name,
+      password: form.password,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};
+
+export const login = async (path: string) => {
+  return await apiClient
+    .get(path)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
 };
 
 export const getAllAchievement = async (path: string) => {
