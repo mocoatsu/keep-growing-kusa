@@ -26,9 +26,12 @@ export const signup = async (form: RequestAuth) => {
     });
 };
 
-export const login = async (path: string) => {
+export const login = async (form: RequestAuth) => {
   return await apiClient
-    .get(path)
+    .post("/auth/login", {
+      name: form.name,
+      password: form.password,
+    })
     .then((response) => {
       return response.data;
     })
