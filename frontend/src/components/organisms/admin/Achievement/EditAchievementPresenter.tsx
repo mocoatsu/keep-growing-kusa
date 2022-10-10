@@ -1,10 +1,18 @@
 import React from "react";
-import { FormControl, FormLabel, Input, HStack } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Container,
+  Box,
+  VStack,
+} from "@chakra-ui/react";
 
 import { Button } from "../../../atomsAndMolecules/Button";
 
 import { UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
 import { RequestAchievement } from "../../../../infrastructure/express/api";
+import { H1 } from "../../../atomsAndMolecules/Heading";
 
 export const EditAchievementPresenter = ({
   ...formProps
@@ -14,33 +22,42 @@ export const EditAchievementPresenter = ({
   register: UseFormRegister<RequestAchievement>;
 }) => {
   return (
-    <form onSubmit={formProps.handleSubmit(formProps.onSubmit)}>
-      <HStack>
-        <FormControl>
-          <FormLabel>実績名</FormLabel>
-          <Input
-            type="text"
-            {...formProps.register("name", { required: true })}
-            required
-          />
-        </FormControl>
-        <FormControl>
-          <FormLabel>実績説明</FormLabel>
-          <Input
-            type="text"
-            {...formProps.register("description", { required: true })}
-          />
-        </FormControl>
-        <FormControl>
-          <FormLabel>実績解除難易度</FormLabel>
-          <Input
-            type="text"
-            {...formProps.register("difficultyLevel", { required: true })}
-          />
-        </FormControl>
-
-        <Button type="submit">登録</Button>
-      </HStack>
-    </form>
+    <Container>
+      <Box backgroundColor={"white"} padding={"2em"} mt={"3em"}>
+        <H1>実績編集</H1>
+        <form onSubmit={formProps.handleSubmit(formProps.onSubmit)}>
+          <VStack>
+            <FormControl>
+              <FormLabel mt={"4"}>実績名</FormLabel>
+              <Input
+                type="text"
+                {...formProps.register("name", { required: true })}
+                variant={"outline"}
+                outlineColor={"#A0AEC0"}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel mt={"3"}>実績説明</FormLabel>
+              <Input
+                type="text"
+                {...formProps.register("description", { required: true })}
+                variant={"outline"}
+                outlineColor={"#A0AEC0"}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel mt={"3"}>実績解除難易度</FormLabel>
+              <Input
+                type="text"
+                {...formProps.register("difficultyLevel", { required: true })}
+                variant={"outline"}
+                outlineColor={"#A0AEC0"}
+              />
+            </FormControl>
+            <Button type="submit">反映する</Button>
+          </VStack>
+        </form>
+      </Box>
+    </Container>
   );
 };
