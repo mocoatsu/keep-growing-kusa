@@ -1,5 +1,5 @@
-import { DashboardPresenter } from "./DashboardPresenter";
+import { DashboardSideBarPresenter } from "./DashboardSideBarPresenter";
 
 export const DashboardContainer = () => {
-  return <DashboardPresenter />;
+  return <DashboardSideBarPresenter />;
 };

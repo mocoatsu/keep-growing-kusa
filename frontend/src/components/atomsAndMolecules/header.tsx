@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Stack,
-  Flex,
-  Text,
-  Button,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Stack, Flex, Text, useDisclosure } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { HeaderLink } from "./Link";
 import { paths } from "../../../constants/paths";
@@ -22,8 +15,9 @@ const Header = (props: any) => {
       justify="space-between"
       wrap="wrap"
       padding={2}
-      bg="teal.500"
-      color="white"
+      bg="white"
+      color="A0AEC0"
+      shadow={"xs"}
       {...props}
     >
       <Box display={{ base: "block", md: "none" }} onClick={handleToggle}>
@@ -43,8 +37,7 @@ const Header = (props: any) => {
         <HeaderLink href={paths.mypage}>マイページ</HeaderLink>
         <HeaderLink href={paths.activity}>活動記録</HeaderLink>
         <HeaderLink href={paths.achievement}>実績</HeaderLink>
-        <HeaderLink href={paths.admin.index}>管理</HeaderLink>
-        <HeaderLink href={paths.login}>ログイン</HeaderLink>
+        <HeaderLink href={paths.admin.achievement.list}>管理</HeaderLink>
 
         <Text>エンジニア</Text>
         <Text>フレンド</Text>
@@ -54,12 +47,7 @@ const Header = (props: any) => {
         display={{ base: isOpen ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
-        <Button
-          variant="outline"
-          _hover={{ bg: "teal.700", borderColor: "teal.700" }}
-        >
-          ログイン
-        </Button>
+        <HeaderLink href={paths.login}>ログイン</HeaderLink>
       </Box>
     </Flex>
   );
