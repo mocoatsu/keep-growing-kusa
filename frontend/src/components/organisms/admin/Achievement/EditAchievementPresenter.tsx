@@ -22,7 +22,7 @@ export const EditAchievementPresenter = ({
   register: UseFormRegister<RequestAchievement>;
 }) => {
   return (
-    <Container>
+    <Container maxWidth={"container.xl"} h="calc(100vh)">
       <Box backgroundColor={"white"} padding={"2em"} mt={"3em"}>
         <H1>実績編集</H1>
         <form onSubmit={formProps.handleSubmit(formProps.onSubmit)}>

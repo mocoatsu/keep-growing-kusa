@@ -12,13 +12,13 @@ export const DashboardSideBarPresenter = () => {
       h="calc(100vh)"
       padding={"1.5em"}
     >
-      <UnorderedList>
+      <UnorderedList spacing={1.5}>
+        <ListItem>
+          <NavLink href={"#"} name={"エンジニア"}></NavLink>
+        </ListItem>
         <ListItem>
           <NavLink href={paths.admin.achievement.list} name={"実績"}></NavLink>
         </ListItem>
-        <ListItem>Consectetur adipiscing elit</ListItem>
-        <ListItem>Integer molestie lorem at massa</ListItem>
-        <ListItem>Facilisis in pretium nisl aliquet</ListItem>
       </UnorderedList>
     </Box>
   );

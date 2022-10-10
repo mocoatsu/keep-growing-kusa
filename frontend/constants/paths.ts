@@ -5,7 +5,6 @@ export const paths = {
   signup: "/signup",
   login: "/login",
   admin: {
-    index: "/admin/dashboard",
     achievement: {
       list: "/admin/achievement/achievement-list",
       create: "/admin/achievement/achievement-create",
