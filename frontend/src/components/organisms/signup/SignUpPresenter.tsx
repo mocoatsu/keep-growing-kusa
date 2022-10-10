@@ -1,8 +1,18 @@
-import { FormControl, FormLabel, HStack, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  FormControl,
+  FormLabel,
+  Input,
+  VStack,
+} from "@chakra-ui/react";
+
 import React from "react";
 import { UseFormHandleSubmit, UseFormRegister } from "react-hook-form";
+
 import { RequestAuth } from "../../../infrastructure/express/api";
 import { Button } from "../../atomsAndMolecules/Button";
+import { H1 } from "../../atomsAndMolecules/Heading";
 
 export const SignUpPresenter = ({
   ...formProps
@@ -12,26 +22,34 @@ export const SignUpPresenter = ({
   register: UseFormRegister<RequestAuth>;
 }) => {
   return (
-    <form onSubmit={formProps.handleSubmit(formProps.onSubmit)}>
-      <HStack>
-        <FormControl>
-          <FormLabel>ユーザ名</FormLabel>
-          <Input
-            type="text"
-            {...formProps.register("name", { required: true })}
-            required
-          />
-        </FormControl>
-        <FormControl>
-          <FormLabel>パスワード</FormLabel>
-          <Input
-            type="password"
-            {...formProps.register("password", { required: true })}
-            required
-          />
-        </FormControl>
-        <Button type="submit">送信</Button>
-      </HStack>
-    </form>
+    <Container>
+      <Box backgroundColor={"white"} padding={"2em"} mt={"3em"}>
+        <H1>サインアップ</H1>
+        <form onSubmit={formProps.handleSubmit(formProps.onSubmit)}>
+          <VStack>
+            <FormControl>
+              <FormLabel mt={"4"}>ユーザ名</FormLabel>
+              <Input
+                type="text"
+                {...formProps.register("name", { required: true })}
+                variant={"outline"}
+                outlineColor={"#A0AEC0"}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel mt={"3"}>パスワード</FormLabel>
+              <Input
+                type="password"
+                {...formProps.register("password", { required: true })}
+                variant={"outline"}
+                outlineColor={"#A0AEC0"}
+                mb={"5"}
+              />
+            </FormControl>
+            <Button type="submit">アカウントを作成</Button>
+          </VStack>
+        </form>
+      </Box>
+    </Container>
   );
 };

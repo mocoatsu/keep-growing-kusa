@@ -2,11 +2,14 @@ import { useForm } from "react-hook-form";
 import { RequestAuth, signup } from "../../../infrastructure/express/api";
 import { SignUpPresenter } from "./SignUpPresenter";
 
-export function SignUpContainer() {
-  const { handleSubmit, register } = useForm<RequestAuth>();
+export const SignUpContainer = () => {
+  const { handleSubmit, register } = useForm<RequestAuth>({
+    mode: "onChange",
+  });
 
-  const onSubmit = (v: RequestAuth) =>
+  const onSubmit = (v: RequestAuth) => {
     signup({ name: v.name, password: v.password });
+  };
 
   return (
     <SignUpPresenter
@@ -15,4 +18,4 @@ export function SignUpContainer() {
       onSubmit={onSubmit}
     ></SignUpPresenter>
   );
-}
+};

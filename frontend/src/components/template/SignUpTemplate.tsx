@@ -6,7 +6,7 @@ export function SignUpTemplate() {
   return (
     <ErrorBoundary fallback={<p>エラー</p>}>
       <Suspense fallback={<div>loading...</div>}>
-        <SignUpContainer></SignUpContainer>
+        <SignUpContainer />
       </Suspense>
     </ErrorBoundary>
   );

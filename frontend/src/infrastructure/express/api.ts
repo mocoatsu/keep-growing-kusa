@@ -14,7 +14,7 @@ export type RequestAchievement = {
 
 export const signup = async (form: RequestAuth) => {
   return await apiClient
-    .post("/signup", {
+    .post("/auth/signup", {
       name: form.name,
       password: form.password,
     })
