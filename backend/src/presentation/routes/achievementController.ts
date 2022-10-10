@@ -13,7 +13,7 @@ router
 
     const achievements = await achievementApplicationService.findAll();
 
-    res.json(achievements.value());
+    res.json(achievements);
   })
   .get("/:id", async (req, res) => {
     const achievementApplicationService = new AchievementApplicationService(
