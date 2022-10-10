@@ -6,5 +6,9 @@ type props = {
 };
 
 export function Button({ children, ...buttonProps }: props & ButtonProps) {
-  return <ChakraButton {...buttonProps}>{children}</ChakraButton>;
+  return (
+    <ChakraButton display={"inline-block"} {...buttonProps}>
+      {children}
+    </ChakraButton>
+  );
 }
