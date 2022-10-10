@@ -62,7 +62,6 @@ export const CreateAchievementPresenter = () => {
                   outlineColor={"#A0AEC0"}
                 />
               </FormControl>
-
               {errors.name && errors.description && errors.difficultyLevel && (
                 <span>入力されていない項目があります</span>
               )}

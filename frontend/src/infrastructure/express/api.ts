@@ -12,6 +12,17 @@ export type RequestAchievement = {
   difficultyLevel: number;
 };
 
+export const session = async () => {
+  return await apiClient
+    .get("/auth")
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};
+
 export const signup = async (form: RequestAuth) => {
   return await apiClient
     .post("/auth/signup", {

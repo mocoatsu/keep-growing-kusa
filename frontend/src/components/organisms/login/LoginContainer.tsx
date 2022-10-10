@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { login, RequestAuth } from "../../../infrastructure/express/api";
 import { LoginPresenter } from "./LoginPresenter";
@@ -7,8 +6,6 @@ export function LoginContainer() {
   const { handleSubmit, register } = useForm<RequestAuth>({
     mode: "onChange",
   });
-
-  useEffect(() => {}, []);
 
   const onSubmit = (v: RequestAuth) => {
     login({ name: v.name, password: v.password });
