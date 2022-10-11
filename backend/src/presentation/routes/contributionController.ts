@@ -3,7 +3,7 @@ import { ContributionApplicationService } from "../../application/contributions/
 
 export const router = express.Router();
 
-router.get("/contributions", async (req, res) => {
+router.get("/", async (req, res) => {
   const contributionApplicationService = new ContributionApplicationService();
 
   const contributions =

@@ -1,9 +1,9 @@
 import { FactoryEngineerLevel } from "../../../domain/EngineerLevel/FactoryEngineerLevel";
-import { useContribution } from "../../../hooks/useContribuitons";
+import { useContribution2 } from "../../../hooks/useContribuitons2";
 import { EngineerTitlePresenter } from "./EngineerTitlePresenter";
 
 export function EngineerTitleContainer() {
-  const { totalContributions } = useContribution();
+  const { totalContributions } = useContribution2();
 
   const engineerLevel =
     FactoryEngineerLevel.engineerLevelByContributionsCount(totalContributions);
