@@ -5,15 +5,14 @@ export const ThisWeekActivityPresenter = ({
   contributionToday,
   contributionThisWeek,
   // contributionThisMonth,
-  increseComparedToYesterday,
-  increseComparedToLastWeek,
+  increasedCountFromYesterday,
+  increasedCountFromLastWeek,
 }: {
   contributionToday: string;
   contributionThisWeek: string;
   // contributionThisMonth: string;
-  increseComparedToYesterday: string;
-  increseComparedToLastWeek: string;
-  // increseComparedToLastMonth: string;
+  increasedCountFromYesterday: string;
+  increasedCountFromLastWeek: string;
 }) => {
   return (
     <>
@@ -22,8 +21,8 @@ export const ThisWeekActivityPresenter = ({
           label="今日"
           content={contributionToday}
           badgeContent={
-            increseComparedToYesterday
-              ? `昨日比${increseComparedToYesterday} ↑`
+            increasedCountFromYesterday
+              ? `昨日比${increasedCountFromYesterday} ↑`
               : ""
           }
         />
@@ -31,8 +30,8 @@ export const ThisWeekActivityPresenter = ({
           label="今週"
           content={contributionThisWeek}
           badgeContent={
-            increseComparedToLastWeek
-              ? `先週比${increseComparedToLastWeek} ↑`
+            increasedCountFromLastWeek
+              ? `先週比${increasedCountFromLastWeek} ↑`
               : ""
           }
         />
