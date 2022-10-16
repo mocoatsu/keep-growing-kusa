@@ -1,11 +1,16 @@
 import { EngineerId } from "./engineerId";
+import { EngineerName } from "./engineerName";
 
 export class Engineer {
   private id: EngineerId;
-  private name: String;
+  private engineerName: EngineerName;
 
-  constructor(id: EngineerId, name: String) {
+  constructor(id: EngineerId, name: EngineerName) {
     this.id = id;
-    this.name = name;
+    this.engineerName = name;
+  }
+
+  get name() {
+    return this.engineerName;
   }
 }

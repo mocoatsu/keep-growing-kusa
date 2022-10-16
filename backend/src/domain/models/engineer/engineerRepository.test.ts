@@ -1,5 +1,5 @@
-import { EngineerId } from "./engineerId";
-import { Condition } from "./EngineerRepository";
+import { EngineerName } from "./engineerName";
+import { Condition } from "./engineerRepository";
 
 describe("Condition", () => {
   it("where句を生成できる", () => {
@@ -13,7 +13,7 @@ describe("Condition", () => {
   });
   it("エンジニア名を検索条件にする", () => {
     // 処理
-    const result = new Condition().name("testName").build();
+    const result = new Condition().name(new EngineerName("testName")).build();
 
     // 出力
     expect(result).toEqual({
