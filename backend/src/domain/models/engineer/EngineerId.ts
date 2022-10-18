@@ -1,15 +1,21 @@
 export class EngineerId {
+  private static readonly EMPTY = 0;
+  private static readonly MIN = 0;
   private engineerId: number;
 
   constructor(v: number) {
-    const id = Number(v);
-    if (v <= 0) {
+    if (v <= EngineerId.MIN) {
       throw new Error("エンジニアIDが正しくありません");
     }
-    this.engineerId = id;
+
+    this.engineerId = v;
   }
 
   value() {
     return this.engineerId;
+  }
+
+  static empty() {
+    return new EngineerId(EngineerId.EMPTY);
   }
 }

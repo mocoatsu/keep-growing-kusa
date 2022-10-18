@@ -1,16 +1,27 @@
-import { EngineerId } from "./engineerId";
+import { EngineerId } from "./EngineerId";
 import { EngineerName } from "./engineerName";
+import { EngineerPassword } from "./EngineerPassword";
 
 export class Engineer {
-  private id: EngineerId;
+  private engineerId: EngineerId;
   private engineerName: EngineerName;
+  private engineerPassword: EngineerPassword;
 
-  constructor(id: EngineerId, name: EngineerName) {
-    this.id = id;
+  constructor(id: EngineerId, name: EngineerName, password: EngineerPassword) {
+    this.engineerId = id;
     this.engineerName = name;
+    this.engineerPassword = password;
   }
 
-  get name() {
+  id() {
+    return this.engineerId;
+  }
+
+  name() {
     return this.engineerName;
+  }
+
+  password() {
+    return this.engineerPassword;
   }
 }
