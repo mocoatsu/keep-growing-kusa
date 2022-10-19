@@ -15,6 +15,7 @@
     "@graphql-codegen/typescript-graphql-request": "^4.5.5",
     "@graphql-codegen/typescript-operations": "^2.5.3",
     "@prisma/client": "^4.3.1",
+    "argon2": "^0.30.1",
     "cors": "^2.8.5",
     "cross-fetch": "^3.1.5",
     "express": "^4.18.1",
