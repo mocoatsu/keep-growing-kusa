@@ -9,7 +9,8 @@ datasource db {
 
 model Engineer {
   id                Int                 @id @default(autoincrement())
-  name              String
+  name              String              @unique
+  password          String
   // friend   Friend    @relation(fields: [userId], references: [id])
   UnlockAchievement UnlockAchievement[]
 }
