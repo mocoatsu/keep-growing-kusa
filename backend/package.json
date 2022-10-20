@@ -25,7 +25,8 @@
     "iron-session": "^6.2.1",
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
-    "pg-hstore": "^2.3.4"
+    "pg-hstore": "^2.3.4",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

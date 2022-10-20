@@ -1,4 +1,4 @@
-import { EngineerId } from "../engineer/engineerId";
+import { EngineerId } from "../engineer/EngineerId";
 import { EngineerLevelId } from "./EngineerLevelId";
 import { EngineerTitle } from "./EngineerTitle";
 
