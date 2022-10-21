@@ -14,7 +14,10 @@ export const DashboardSideBarPresenter = () => {
     >
       <UnorderedList spacing={1.5}>
         <ListItem>
-          <NavLink href={"#"} name={"エンジニア"}></NavLink>
+          <NavLink
+            href={paths.admin.engineer.list}
+            name={"エンジニア"}
+          ></NavLink>
         </ListItem>
         <ListItem>
           <NavLink href={paths.admin.achievement.list} name={"実績"}></NavLink>
