@@ -1,12 +1,14 @@
 import { Engineer as Instance, Prisma, PrismaClient } from "@prisma/client";
 
 import { Engineer } from "./Engineer";
-import { EngineerId } from "./engineerId";
+import { EngineerId } from "./EngineerId";
 import { EngineerName } from "./engineerName";
+import { EngineerPassword } from "./EngineerPassword";
+import { IEngineerRepository } from "./iEnginnerRepository";
 
 const prisma = new PrismaClient();
 
-export class EngineerRepository {
+export class EngineerRepository implements IEngineerRepository {
   async findByPk(pk: EngineerId): Promise<Engineer> {
     const instance = await prisma.engineer.findUnique({
       where: {
@@ -31,9 +33,13 @@ export class EngineerRepository {
   }
 
   async create(v: Engineer): Promise<Engineer> {
+    if (v.password().isEmpty()) {
+      throw new Error("password needed");
+    }
     const instance = await prisma.engineer.create({
       data: {
-        name: v.name.value(),
+        name: v.name().value(),
+        password: v.password().value(),
       },
     });
 
@@ -45,7 +51,8 @@ export class EngineerRepository {
   private toEntity(instance: Instance) {
     return new Engineer(
       new EngineerId(instance.id),
-      new EngineerName(instance.name)
+      new EngineerName(instance.name),
+      EngineerPassword.empty() // passwordは外部に露出させない
     );
   }
 }

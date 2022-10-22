@@ -1,5 +1,5 @@
 import express from "express";
-import { EngineerApplicaitionService } from "../../application/engineer/engineerApplicationService";
+import { EngineerApplicationService } from "../../application/engineer/engineerApplicationService";
 import { EngineerRepository } from "../../domain/models/engineer/engineerRepository";
 import { sessionExpress } from "../middleware";
 import { signUpValidation } from "../validation/authValidation";
@@ -10,7 +10,7 @@ router
   .use(sessionExpress)
   .post("/signup", async (req, res) => {
     const params = signUpValidation(req.body.name, req.body.password);
-    const engineerApplicaitionService = new EngineerApplicaitionService(
+    const engineerApplicaitionService = new EngineerApplicationService(
       new EngineerRepository()
     );
     await engineerApplicaitionService.signUp(params.name, params.password);

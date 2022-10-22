@@ -4,7 +4,7 @@ export class EngineerId {
   private engineerId: number;
 
   constructor(v: number) {
-    if (v <= EngineerId.MIN) {
+    if (v < EngineerId.MIN) {
       throw new Error("エンジニアIDが正しくありません");
     }
 

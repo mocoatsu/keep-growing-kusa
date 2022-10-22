@@ -1,4 +1,7 @@
+import * as argon2 from "argon2";
+
 import { EngineerName } from "../models/engineer/engineerName";
+import { EngineerPassword } from "../models/engineer/EngineerPassword";
 import { Condition } from "../models/engineer/engineerRepository";
 import { IEngineerRepository } from "../models/engineer/iEnginnerRepository";
 
@@ -13,6 +16,12 @@ export class EngineerService {
       new Condition().name(name)
     );
 
-    return engineer ? true : false;
+    return engineer.length ? true : false;
+  }
+
+  async hashEngineerPassword(password: string) {
+    const hash = await argon2.hash(password);
+
+    return new EngineerPassword(hash);
   }
 }
