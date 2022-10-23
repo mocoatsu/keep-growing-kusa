@@ -6,6 +6,10 @@ export type RequestAuth = {
   password: string;
 };
 
+export type RequestEngineer = {
+  name: string;
+};
+
 export type RequestAchievement = {
   name: string;
   description: string;
@@ -43,6 +47,39 @@ export const login = async (form: RequestAuth) => {
       name: form.name,
       password: form.password,
     })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};
+
+export const getAllEngineers = async (path: string) => {
+  return await apiClient
+    .get(path)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};
+
+export const getEngineerById = async (engineerId: String) => {
+  return await apiClient
+    .get(`/engineers/${engineerId}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};
+
+export const deleteEngineer = (engineerId: number) => {
+  return apiClient
+    .delete(`engineers/delete/${engineerId}`)
     .then((response) => {
       return response.data;
     })
