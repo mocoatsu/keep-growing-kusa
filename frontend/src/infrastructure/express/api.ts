@@ -77,6 +77,20 @@ export const getEngineerById = async (engineerId: String) => {
     });
 };
 
+export const editEngineerById = async (
+  engineerId: Number,
+  params: RequestEngineer
+) => {
+  return await apiClient
+    .put(`/engineers/edit/${engineerId}`, params)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};
+
 export const deleteEngineer = (engineerId: number) => {
   return apiClient
     .delete(`engineers/delete/${engineerId}`)

@@ -3,16 +3,14 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useEngineerById } from "../../../../hooks/useEngineerById";
 import {
-  editAchievementById,
+  editEngineerById,
   RequestEngineer,
 } from "../../../../infrastructure/express/api";
 import { EditEngineerPresenter } from "./EditEngineerPresenter";
 
 export const EditEngineerContainer = () => {
   const router = useRouter();
-  const { engineer } = useEngineerById(
-    router.query.id as string | undefined
-  );
+  const { engineer } = useEngineerById(router.query.id as string | undefined);
 
   const { handleSubmit, register, reset } = useForm<RequestEngineer>({
     defaultValues: {
@@ -26,7 +24,7 @@ export const EditEngineerContainer = () => {
   }, [engineer.id]);
 
   const onSubmit = (v: RequestEngineer) =>
-  engineer.id ? editAchievementById(engineer.id, v) : "";
+    engineer.id ? editEngineerById(engineer.id, v) : "";
   return (
     <EditEngineerPresenter
       handleSubmit={handleSubmit}

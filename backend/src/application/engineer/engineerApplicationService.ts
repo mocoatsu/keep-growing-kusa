@@ -28,6 +28,15 @@ export class EngineerApplicationService {
     });
   }
 
+  async findById(id: number): Promise<EngineerResponse> {
+    const engineer = await this.engineerRepository.findByPk(new EngineerId(id));
+
+    return {
+      id: engineer.id().value(),
+      name: engineer.name().value(),
+    };
+  }
+
   async signUp(name: string, password: string) {
     const engineerService = new EngineerService(this.engineerRepository);
 

@@ -4,6 +4,7 @@ import { EngineerApplicationService } from "../../application/engineer/engineerA
 import { AchievementId } from "../../domain/models/achievement/AchievementId";
 import { AchievementRepository } from "../../domain/models/achievement/achievementRepository";
 import { EngineerRepository } from "../../domain/models/engineer/engineerRepository";
+import { getEngineerValidation } from "../validation/engineerValidation";
 
 export const router = express.Router();
 
@@ -18,11 +19,12 @@ router
     res.json(engineers);
   })
   .get("/:id", async (req, res) => {
+    const params = getEngineerValidation(req.params.id);
     const engineerApplicationService = new EngineerApplicationService(
       new EngineerRepository()
     );
 
-    const engineer = await engineerApplicationService.findAll(); // TODO: 特定IDでの検索をできるメソッドに置き換え
+    const engineer = await engineerApplicationService.findById(params.id);
 
     res.json(engineer);
   })
