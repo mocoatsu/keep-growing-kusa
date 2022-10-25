@@ -1,5 +1,5 @@
 import { UnlockAchievements } from "./UnlockAchievements";
-import { EngineerId } from "../engineer/engineerId";
+import { EngineerId } from "../engineer/EngineerId";
 import { UnlockAchievementId } from "./unlockAchievementId";
 
 export interface IUnlockAchievementRepository {

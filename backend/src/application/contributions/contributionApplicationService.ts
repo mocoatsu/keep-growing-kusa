@@ -1,6 +1,7 @@
 import { ComparedToLastWeek } from "../../domain/models/contribution/ComparedToLastWeek";
 import { ComparedToYesterday } from "../../domain/models/contribution/ComparedToYesterday";
 import { ContributionWeeks } from "../../domain/models/contribution/ContributionWeeks";
+import { UnlockAchievementMaterial } from "../../domain/models/unlockAchievementMaterial/unlockAchievementMaterial";
 import { fetchContributions } from "../../infrastructure/Github/githubApi";
 
 export class ContributionApplicationService {
@@ -29,5 +30,20 @@ export class ContributionApplicationService {
         contributionWeeks.contributionLastWeek()
       ).increase(),
     };
+  }
+
+  async getContributionsMaterial() {
+    const contributions = await fetchContributions();
+    const contributionsMaterial = {
+      contributions: {
+        contributionWeeks: new ContributionWeeks(
+          contributions.user?.contributionsCollection.contributionCalendar.weeks
+        ),
+        total:
+          contributions.user?.contributionsCollection.contributionCalendar
+            .totalContributions ?? 0,
+      },
+    };
+    return new UnlockAchievementMaterial(contributionsMaterial);
   }
 }

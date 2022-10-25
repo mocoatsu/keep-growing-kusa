@@ -1,5 +1,5 @@
 import { AchievementId } from "../achievement/AchievementId";
-import { EngineerId } from "../engineer/engineerId";
+import { EngineerId } from "../engineer/EngineerId";
 import { UnlockAchievementId } from "./unlockAchievementId";
 
 export class UnlockAchievement {

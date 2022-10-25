@@ -1,39 +1,33 @@
 import { AchievementRepository } from "../../domain/models/achievement/achievementRepository";
 import { ContributionWeeks } from "../../domain/models/contribution/ContributionWeeks";
-import { EngineerId } from "../../domain/models/engineer/engineerId";
+import { EngineerId } from "../../domain/models/engineer/EngineerId";
+import { IUnlockAchievementRepository } from "../../domain/models/unlockAchievement/iUnlockAchievementRepository";
 import { UnlockAchievementRepository } from "../../domain/models/unlockAchievement/unlockAchievementRepository";
 import { UnlockAchievementMaterial } from "../../domain/models/unlockAchievementMaterial/unlockAchievementMaterial";
 import { fetchContributions } from "../../infrastructure/Github/githubApi";
 
 export class UnlockAchievementApplicationService {
-  async saveFullfilled(engineerId: number) {
-    const achievements = await new AchievementRepository().findAll();
+  private unlockAchievementRepository: IUnlockAchievementRepository;
 
-    const contributions = await fetchContributions();
-    const contributionsMaterial = {
-      contributions: {
-        contributionWeeks: new ContributionWeeks(
-          contributions.user?.contributionsCollection.contributionCalendar.weeks
-        ),
-        total:
-          contributions.user?.contributionsCollection.contributionCalendar
-            .totalContributions ?? 0,
-      },
-    };
+  constructor(unlockAchievementRepository: IUnlockAchievementRepository) {
+    this.unlockAchievementRepository = unlockAchievementRepository;
+  }
 
+  async saveFullfilled(
+    engineerId: number,
+    material: UnlockAchievementMaterial
+  ) {
     const unlockAchievementRepository = new UnlockAchievementRepository();
     const unlockedAchievements =
       await unlockAchievementRepository.findEntitiesByEngineerId(
         new EngineerId(engineerId)
       );
-
-    const materials = new UnlockAchievementMaterial(contributionsMaterial);
+    const achievements = await new AchievementRepository().findAll();
     const lockedAchievements = achievements.locked(unlockedAchievements.ids());
-
-    const filledAchievements = lockedAchievements.filledCondition(materials);
+    const filledAchievements = lockedAchievements.filledCondition(material);
 
     unlockAchievementRepository.save(
-      filledAchievements.toUnlockAchievements(engineerId)
+      filledAchievements.toUnlockAchievements(new EngineerId(engineerId))
     );
   }
 }

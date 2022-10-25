@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { UnlockAchievements } from "./UnlockAchievements";
 import { AchievementId } from "../achievement/AchievementId";
-import { EngineerId } from "../engineer/engineerId";
+import { EngineerId } from "../engineer/EngineerId";
 import { IUnlockAchievementRepository } from "./iUnlockAchievementRepository";
 import { UnlockAchievement } from "./unlockAchievement";
 import { UnlockAchievementId } from "./unlockAchievementId";
