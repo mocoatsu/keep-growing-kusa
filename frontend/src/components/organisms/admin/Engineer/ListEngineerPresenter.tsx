@@ -51,6 +51,8 @@ export const ListEngineerPresenter = ({
               <Tr>
                 <Th>エンジニアID</Th>
                 <Th>エンジニア名</Th>
+                <Th>編集</Th>
+                <Th>削除</Th>
               </Tr>
             </Thead>
             <Tbody>
