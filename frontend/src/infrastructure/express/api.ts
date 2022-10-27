@@ -168,6 +168,19 @@ export const deleteAchievement = (achivementId: number) => {
     });
 };
 
+export const unlockAchievement = (params: any) => {
+  return apiClient
+    .post("/achievements/unlock", {
+      id: params.id,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};
+
 export const fetchContributions = (useId: number) => {
   return apiClient
     .get(`contributions`)
