@@ -17,16 +17,14 @@ export class UnlockAchievementApplicationService {
     engineerId: number,
     material: UnlockAchievementMaterial
   ) {
-    const unlockAchievementRepository = new UnlockAchievementRepository();
     const unlockedAchievements =
-      await unlockAchievementRepository.findEntitiesByEngineerId(
+      await this.unlockAchievementRepository.findEntitiesByEngineerId(
         new EngineerId(engineerId)
       );
     const achievements = await new AchievementRepository().findAll();
     const lockedAchievements = achievements.locked(unlockedAchievements.ids());
     const filledAchievements = lockedAchievements.filledCondition(material);
-
-    unlockAchievementRepository.save(
+    this.unlockAchievementRepository.save(
       filledAchievements.toUnlockAchievements(new EngineerId(engineerId))
     );
   }
