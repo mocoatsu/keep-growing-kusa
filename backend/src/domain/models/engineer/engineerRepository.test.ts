@@ -1,5 +1,28 @@
+import { mockReset } from "jest-mock-extended";
+import { prismaMock } from "../../../singleton";
+import { Engineer } from "./Engineer";
+import { EngineerId } from "./EngineerId";
+
 import { EngineerName } from "./engineerName";
-import { Condition } from "./engineerRepository";
+import { EngineerPassword } from "./EngineerPassword";
+import { Condition, EngineerRepository } from "./engineerRepository";
+
+beforeEach(() => {
+  mockReset(prismaMock);
+});
+
+describe("create", () => {
+  it("エンジニアを作成できる", async () => {
+    // 処理
+    prismaMock.engineer.findUnique.mockResolvedValue({ id: 1, name: "unique engineer", password: "pass" });
+
+    new EngineerRepository().create(new Engineer(new EngineerId(1), new EngineerName("test1"), new EngineerPassword("pass")));
+
+    // 出力
+    const result = new EngineerRepository().findByPk(new EngineerId(1));
+    expect(result).toEqual("");
+  });
+});
 
 describe("Condition", () => {
   it("where句を生成できる", () => {
