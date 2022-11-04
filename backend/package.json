@@ -9,8 +9,7 @@
     "docker:up": "docker-compose -f docker-compose.dev.yml up -d",
     "docker:down": "docker-compose -f docker-compose.dev.yml down",
     "pretest": "npm run docker:up && dotenv -e .env.test -- npx prisma migrate deploy",
-    "test": "dotenv -e .env.test -- jest",
-    "posttest": "npm run docker:down"
+    "test": "dotenv -e .env.test -- jest"
   },
   "author": "",
   "license": "ISC",

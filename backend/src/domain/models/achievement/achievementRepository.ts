@@ -1,10 +1,9 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../client";
+
 import { Achievement } from "./Achievement";
 import { AchievementId } from "./AchievementId";
 import { Achievements } from "./Achievements";
 import { IAchievementRepository } from "./iAchievementRepository";
-
-const prisma = new PrismaClient();
 
 export class AchievementRepository implements IAchievementRepository {
   async findByPk(pk: AchievementId) {

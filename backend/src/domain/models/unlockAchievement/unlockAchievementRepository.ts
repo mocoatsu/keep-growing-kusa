@@ -1,12 +1,11 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../../client";
+
 import { UnlockAchievements } from "./UnlockAchievements";
 import { AchievementId } from "../achievement/AchievementId";
 import { EngineerId } from "../engineer/EngineerId";
 import { IUnlockAchievementRepository } from "./iUnlockAchievementRepository";
 import { UnlockAchievement } from "./unlockAchievement";
 import { UnlockAchievementId } from "./unlockAchievementId";
-
-const prisma = new PrismaClient();
 
 export class UnlockAchievementRepository
   implements IUnlockAchievementRepository

@@ -1,12 +1,11 @@
-import { Engineer as Instance, Prisma, PrismaClient } from "@prisma/client";
+import prisma from "../../../client";
+import { Engineer as Instance, Prisma } from "@prisma/client";
 
 import { Engineer } from "./Engineer";
 import { EngineerId } from "./EngineerId";
 import { EngineerName } from "./engineerName";
 import { EngineerPassword } from "./EngineerPassword";
 import { IEngineerRepository } from "./iEnginnerRepository";
-
-const prisma = new PrismaClient();
 
 export class EngineerRepository implements IEngineerRepository {
   async findByPk(pk: EngineerId): Promise<Engineer> {
@@ -26,7 +25,6 @@ export class EngineerRepository implements IEngineerRepository {
     if (!instances) {
       throw new Error("Invalid condition.");
     }
-
     return instances.map((i) => {
       return this.toEntity(i);
     });
