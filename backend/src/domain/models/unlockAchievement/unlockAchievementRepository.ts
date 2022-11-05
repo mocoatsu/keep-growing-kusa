@@ -1,31 +1,27 @@
 import prisma from "../../../client";
+import { UnlockAchievement as Instance, Prisma } from "@prisma/client";
 
-import { UnlockAchievements } from "./UnlockAchievements";
 import { AchievementId } from "../achievement/AchievementId";
-import { EngineerId } from "../engineer/EngineerId";
-import { IUnlockAchievementRepository } from "./iUnlockAchievementRepository";
+import { UnlockAchievements } from "./UnlockAchievements";
 import { UnlockAchievement } from "./unlockAchievement";
 import { UnlockAchievementId } from "./unlockAchievementId";
+import { IUnlockAchievementRepository } from "./iUnlockAchievementRepository";
+import { EngineerId } from "../engineer/EngineerId";
 
 export class UnlockAchievementRepository
   implements IUnlockAchievementRepository
 {
-  async findEntitiesByEngineerId(engineerId: EngineerId) {
-    const instances = await prisma.unlockAchievement.findMany({
-      where: {
-        engineer_id: engineerId.value(),
-      },
+  async findBy(condition: Condition): Promise<UnlockAchievements> {
+    const instances = await prisma.unlockAchievement.findMany(
+      condition.build()
+    );
+    if (!instances) {
+      throw new Error("Invalid condition.");
+    }
+    const entities = instances.map((i) => {
+      return this.toEntity(i);
     });
-
-    const unlockAchievements = instances.map((i) => {
-      return UnlockAchievement.factory(
-        new UnlockAchievementId(i.id),
-        new AchievementId(i.achievement_id),
-        new EngineerId(i.engineer_id)
-      );
-    });
-
-    return new UnlockAchievements(unlockAchievements);
+    return new UnlockAchievements(entities);
   }
 
   async save(unlockAchievements: UnlockAchievements) {
@@ -47,7 +43,31 @@ export class UnlockAchievementRepository
     const instances = await prisma.unlockAchievement.delete({
       where: { id: id.value() },
     });
-
     return;
+  }
+  private toEntity(instance: Instance) {
+    return new UnlockAchievement(
+      new UnlockAchievementId(instance.id),
+      new AchievementId(instance.achievement_id),
+      new EngineerId(instance.engineer_id)
+    );
+  }
+}
+
+export class Condition {
+  private condition: Prisma.UnlockAchievementWhereInput;
+  constructor(v: Prisma.UnlockAchievementWhereInput = {}) {
+    this.condition = v;
+  }
+
+  build() {
+    return { where: this.condition };
+  }
+
+  engineerId(v: EngineerId) {
+    return new Condition({
+      ...this.condition,
+      engineer_id: v.value(),
+    });
   }
 }

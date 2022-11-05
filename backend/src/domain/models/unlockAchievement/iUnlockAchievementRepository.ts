@@ -1,11 +1,9 @@
 import { UnlockAchievements } from "./UnlockAchievements";
-import { EngineerId } from "../engineer/EngineerId";
 import { UnlockAchievementId } from "./unlockAchievementId";
+import { Condition } from "./unlockAchievementRepository";
 
 export interface IUnlockAchievementRepository {
-  findEntitiesByEngineerId: (
-    engineerId: EngineerId
-  ) => Promise<UnlockAchievements>;
+  findBy: (condition: Condition) => Promise<UnlockAchievements>;
   save: (v: UnlockAchievements) => Promise<void>;
   delete: (id: UnlockAchievementId) => Promise<void>;
 }
