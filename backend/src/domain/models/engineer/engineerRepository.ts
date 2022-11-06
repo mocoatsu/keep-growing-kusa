@@ -20,28 +20,24 @@ export class EngineerRepository implements IEngineerRepository {
     return this.toEntity(instance);
   }
 
-  async findBy(condition: Condition): Promise<Engineer[]> {
+  async findBy(condition: Condition = new Condition()): Promise<Engineer[]> {
     const instances = await prisma.engineer.findMany(condition.build());
-    if (!instances) {
-      throw new Error("Invalid condition.");
-    }
     return instances.map((i) => {
       return this.toEntity(i);
     });
   }
 
-  async create(v: Engineer): Promise<Engineer> {
+  async create(v: Engineer): Promise<void> {
     if (v.password().isEmpty()) {
       throw new Error("password needed");
     }
-    const instance = await prisma.engineer.create({
+    await prisma.engineer.create({
       data: {
         name: v.name().value(),
         password: v.password().value(),
       },
     });
-
-    return this.toEntity(instance);
+    return;
   }
   // async update(engineer: Engineer): Promise<Engineer> {}
   // async delete(id: EngineerId): Promise<void> {}

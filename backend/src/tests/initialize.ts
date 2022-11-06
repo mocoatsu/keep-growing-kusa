@@ -1,6 +1,7 @@
-import { PrismaClient } from "@prisma/client";
 import { Prisma } from ".prisma/client";
 import prisma from "../client";
+
+jest.setTimeout(30000);
 
 export const resetTable = async (
   modelNames: Prisma.ModelName[]

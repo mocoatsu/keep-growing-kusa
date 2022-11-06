@@ -2,6 +2,7 @@
 CREATE TABLE "Engineer" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
 
     CONSTRAINT "Engineer_pkey" PRIMARY KEY ("id")
 );
@@ -24,6 +25,9 @@ CREATE TABLE "UnlockAchievement" (
 
     CONSTRAINT "UnlockAchievement_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Engineer_name_key" ON "Engineer"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Achievement_name_key" ON "Achievement"("name");
