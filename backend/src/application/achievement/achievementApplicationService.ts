@@ -31,8 +31,7 @@ export class AchievementApplicationService {
   }
 
   async findAll(): Promise<AchievementResponse[]> {
-    const allAchievements = await this.achievementRepository.findAll();
-
+    const allAchievements = await this.achievementRepository.findBy();
     return allAchievements.value().map((v) => {
       return {
         id: v.id ? v.id.value() : 0,

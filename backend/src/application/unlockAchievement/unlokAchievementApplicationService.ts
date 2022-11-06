@@ -18,7 +18,7 @@ export class UnlockAchievementApplicationService {
     const unlockedAchievements = await this.unlockAchievementRepository.findBy(
       new Condition().engineerId(new EngineerId(engineerId))
     );
-    const achievements = await new AchievementRepository().findAll();
+    const achievements = await new AchievementRepository().findBy();
     const lockedAchievements = achievements.locked(unlockedAchievements.ids());
     const filledAchievements = lockedAchievements.filledCondition(material);
     this.unlockAchievementRepository.save(
