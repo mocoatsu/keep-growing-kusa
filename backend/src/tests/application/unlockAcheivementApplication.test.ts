@@ -18,7 +18,7 @@ import { UnlockAchievements } from "../../domain/models/unlockAchievement/Unlock
 import { UnlockAchievementMaterial } from "../../domain/models/unlockAchievementMaterial/unlockAchievementMaterial";
 import { resetTable } from "../initialize";
 
-beforeAll(async () => {
+beforeEach(async () => {
   await resetTable(["Achievement", "UnlockAchievement", "Engineer"]);
 });
 
@@ -26,7 +26,7 @@ afterAll(async () => {
   await prisma.$disconnect();
 });
 
-describe("saveFullfilled", () => {
+describe("unlockFullfilledAchievements", () => {
   it("実績解除条件を満たした実績を保存できる", async () => {
     // 入力
     jest.spyOn(AchievementCondition.prototype, "isFullfilled").mockImplementation(() => {
@@ -39,10 +39,27 @@ describe("saveFullfilled", () => {
 
     // 処理
     const unlockAchievementApplicationService = new UnlockAchievementApplicationService(unlockAchievementRepository);
-    await unlockAchievementApplicationService.saveFullfilled(1, materials);
+    await unlockAchievementApplicationService.unlockFullfilledAchievements(1, materials);
 
     // 出力
     const result = await unlockAchievementRepository.findBy(new Condition().engineerId(new EngineerId(1)));
     expect(result).toEqual(new UnlockAchievements([new UnlockAchievement(new UnlockAchievementId(1), new AchievementId(1), new EngineerId(1))]));
+  });
+  it("実績解除条件を満たしていない実績は保存しない", async () => {
+    // 入力
+    jest.spyOn(AchievementCondition.prototype, "isFullfilled").mockImplementation(() => {
+      return false;
+    });
+    await new AchievementRepository().create(Achievement.factoryWithoutId("achievement1", "実績1", 10));
+    const unlockAchievementRepository = new UnlockAchievementRepository();
+    const materials = new UnlockAchievementMaterial({ contributions: { contributionWeeks: new ContributionWeeks(), total: 100 } });
+
+    // 処理
+    const unlockAchievementApplicationService = new UnlockAchievementApplicationService(unlockAchievementRepository);
+    await unlockAchievementApplicationService.unlockFullfilledAchievements(1, materials);
+
+    // 出力
+    const result = await unlockAchievementRepository.findBy(new Condition().engineerId(new EngineerId(1)));
+    expect(result).toEqual(new UnlockAchievements([]));
   });
 });
