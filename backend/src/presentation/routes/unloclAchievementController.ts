@@ -10,20 +10,6 @@ export const router = express.Router();
 
 router
   .get("/all", async (req, res) => {})
-  // 実績解除条件と照合して実績解除をする
-  .post("/save/:engineerId", async (req, res) => {
-    const unlockAchievementApplicationService =
-      new UnlockAchievementApplicationService(
-        new UnlockAchievementRepository()
-      );
-    const contributionApplicationService = new ContributionApplicationService();
-    await unlockAchievementApplicationService.saveFullfilled(
-      Number(req.params.engineerId),
-      await contributionApplicationService.getContributionsMaterial()
-    );
-
-    res.json({ message: "実績の解除に成功しました" });
-  })
   .put("/edit/:id", async (req, res) => {
     const unlockAchievementApplicationService =
       new AchievementApplicationService(new AchievementRepository());
