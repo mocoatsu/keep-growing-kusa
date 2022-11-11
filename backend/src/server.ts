@@ -5,7 +5,7 @@ import morgan from "morgan";
 import { router as authRouter } from "./presentation/routes/authController";
 import { router as engineerRouter } from "./presentation/routes/engineerController";
 import { router as achievementRouter } from "./presentation/routes/achievementController";
-import { router as unlockAchievementRouter } from "./presentation/routes/unloclAchievementController";
+import { router as unlockAchievementRouter } from "./presentation/routes/unlockAchievementController";
 import { router as contributionRouter } from "./presentation/routes/contributionController";
 
 const app = express();

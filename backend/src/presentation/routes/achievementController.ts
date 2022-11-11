@@ -1,7 +1,7 @@
 import express from "express";
 import { AchievementApplicationService } from "../../application/achievement/achievementApplicationService";
 import { ContributionApplicationService } from "../../application/contributions/contributionApplicationService";
-import { UnlockAchievementApplicationService } from "../../application/unlockAchievement/unlokAchievementApplicationService";
+import { UnlockAchievementApplicationService } from "../../application/unlockAchievement/unlockAchievementApplicationService";
 import { AchievementId } from "../../domain/models/achievement/AchievementId";
 import { AchievementRepository } from "../../domain/models/achievement/achievementRepository";
 import { UnlockAchievementRepository } from "../../domain/models/unlockAchievement/unlockAchievementRepository";
@@ -73,6 +73,11 @@ router
     const material =
       await new ContributionApplicationService().getContributionsMaterial();
     // @@ エンジニアIDを渡せるようにする
-    unlockAchievementApplicationService.saveFullfilled(1, material);
-    res.json();
+    const unlockAchievements =
+      await unlockAchievementApplicationService.unlockFullfilledAchievements(
+        1,
+        material
+      );
+
+    res.json(unlockAchievements);
   });
