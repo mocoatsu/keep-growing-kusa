@@ -39,12 +39,16 @@ export class UnlockAchievementRepository
     return;
   }
 
-  async delete(id: UnlockAchievementId) {
-    const instances = await prisma.unlockAchievement.delete({
-      where: { id: id.value() },
+  async delete(achievementId: AchievementId, engineerId: EngineerId) {
+    await prisma.unlockAchievement.deleteMany({
+      where: {
+        achievement_id: achievementId.value(),
+        engineer_id: engineerId.value(),
+      },
     });
     return;
   }
+
   private toEntity(instance: Instance) {
     return new UnlockAchievement(
       new UnlockAchievementId(instance.id),
