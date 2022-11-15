@@ -2,8 +2,6 @@ import { AchievementId } from "../../domain/models/achievement/AchievementId";
 import { AchievementRepository } from "../../domain/models/achievement/achievementRepository";
 import { EngineerId } from "../../domain/models/engineer/EngineerId";
 import { IUnlockAchievementRepository } from "../../domain/models/unlockAchievement/iUnlockAchievementRepository";
-import { UnlockAchievementId } from "../../domain/models/unlockAchievement/unlockAchievementId";
-import { UnlockAchievementIds } from "../../domain/models/unlockAchievement/unlockAchievementIds";
 import { Condition } from "../../domain/models/unlockAchievement/unlockAchievementRepository";
 import { UnlockAchievementMaterial } from "../../domain/models/unlockAchievementMaterial/unlockAchievementMaterial";
 
@@ -12,6 +10,25 @@ export class UnlockAchievementApplicationService {
 
   constructor(unlockAchievementRepository: IUnlockAchievementRepository) {
     this.unlockAchievementRepository = unlockAchievementRepository;
+  }
+
+  async getAllUnlockedAchievements(engineerId: number) {
+    const unlockedAchievements = await this.unlockAchievementRepository.findBy(
+      new Condition().engineerId(new EngineerId(engineerId))
+    );
+    const achievements = await new AchievementRepository().findBy();
+
+    return achievements
+      .unlocked(unlockedAchievements.ids())
+      .value()
+      .map((v) => {
+        return {
+          id: v.id ? v.id.value() : 0,
+          name: v.name,
+          description: v.description,
+          difficultyLevel: v.difficultyLevel,
+        };
+      });
   }
 
   async unlockFullfilledAchievements(

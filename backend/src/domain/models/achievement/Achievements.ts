@@ -31,13 +31,13 @@ export class Achievements {
   }
 
   // 解除された実績のみ取得
-  unlocked(unlockAchievementIds: UnlockAchievements[]): Achievements {
+  unlocked(unlockAchievementIds: UnlockAchievementIds): Achievements {
     const unlockedAchievements = this.achievements.filter((achievement) => {
       if (achievement.id === null) {
         throw new Error("invalid achievement id exists ");
       }
 
-      return achievement.id.value() in unlockAchievementIds;
+      return unlockAchievementIds.toNumber().includes(achievement.id.value());
     });
     return new Achievements(unlockedAchievements);
   }

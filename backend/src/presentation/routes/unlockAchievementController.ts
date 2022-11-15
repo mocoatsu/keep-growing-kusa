@@ -15,6 +15,7 @@ router
       await unlockAchievementApplicationService.getAllUnlockedAchievements(
         Number(req.params.engineerId)
       );
+
     res.json(unlockedAchievements);
   })
   .post("/delete", async (req, res) => {
