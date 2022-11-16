@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { EnginnerTitleContainer } from "../organisms/EngineerTitle/EnginnerTitleContainer";
+import { EngineerTitleContainer } from "../organisms/EngineerTitle/EngineerTitleContainer";
 
 export function MypageTemplate() {
   return (
     <ErrorBoundary fallback={<p>エラー</p>}>
       <Suspense fallback={<div>loading...</div>}>
-        <EnginnerTitleContainer></EnginnerTitleContainer>
+        <EngineerTitleContainer></EngineerTitleContainer>
       </Suspense>
     </ErrorBoundary>
   );

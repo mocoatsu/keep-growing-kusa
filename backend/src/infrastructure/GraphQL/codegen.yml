@@ -1,0 +1,9 @@
+# codegen.yml
+schema: ./Github/schema.graphql
+documents: query.ts
+generates:
+  ./type.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request

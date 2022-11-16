@@ -1,9 +1,10 @@
-import { PrismaClient } from "@prisma/client";
-import { Achievement } from "./achievement";
-import { AchievementId } from "./AchievementId";
-import { IAchievementRepository } from "./iAchievementRepository";
+import { Achievement as Instance, Prisma } from "@prisma/client";
+import prisma from "../../../client";
 
-const prisma = new PrismaClient();
+import { Achievement } from "./Achievement";
+import { AchievementId } from "./AchievementId";
+import { Achievements } from "./Achievements";
+import { IAchievementRepository } from "./iAchievementRepository";
 
 export class AchievementRepository implements IAchievementRepository {
   async findByPk(pk: AchievementId) {
@@ -15,65 +16,65 @@ export class AchievementRepository implements IAchievementRepository {
     if (!instance) {
       throw new Error("Invalid Achievement Id");
     }
-
-    return Achievement.factory(
-      instance.id,
-      instance.name,
-      instance.description,
-      instance.difficulty_level
-    );
+    return this.toEntity(instance);
   }
 
-  async findAll() {
-    const instances = await prisma.achievement.findMany();
-
-    return instances.map((i) => {
-      return Achievement.factory(
-        Number(i.id),
-        i.name,
-        i.description,
-        i.difficulty_level
-      );
+  async findBy(condition: Condition = new Condition()): Promise<Achievements> {
+    const instances = await prisma.achievement.findMany(condition.build());
+    const achievements = instances.map((i) => {
+      return this.toEntity(i);
     });
+    return new Achievements(achievements);
   }
 
   async create(v: Achievement) {
-    const instances = await prisma.achievement.create({
+    await prisma.achievement.create({
       data: {
         name: v.name,
         description: v.description,
         difficulty_level: v.difficultyLevel,
       },
     });
-
     return;
   }
 
   async update(achievement: Achievement): Promise<Achievement> {
     if (achievement.id === null) throw Error("no achievement id");
-
     const instance = await prisma.achievement.update({
-      where: { id: achievement.id },
+      where: { id: achievement.id.value() },
       data: {
         name: achievement.name,
         description: achievement.description,
         difficulty_level: achievement.difficultyLevel,
       },
     });
+    return this.toEntity(instance);
+  }
 
+  async delete(id: AchievementId) {
+    await prisma.achievement.delete({
+      where: { id: id.value() },
+    });
+    return;
+  }
+
+  private toEntity(instance: Instance) {
     return Achievement.factory(
-      instance.id,
+      new AchievementId(instance.id),
       instance.name,
       instance.description,
       instance.difficulty_level
     );
   }
+}
 
-  async delete(id: AchievementId) {
-    const instances = await prisma.achievement.delete({
-      where: { id: id.value() },
-    });
+export class Condition {
+  private condition: Prisma.AchievementWhereInput;
+  constructor(v: Prisma.AchievementWhereInput = {}) {
+    this.condition = v;
+  }
 
-    return;
+  build() {
+    return { where: this.condition };
   }
 }
