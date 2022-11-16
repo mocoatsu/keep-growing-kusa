@@ -22,5 +22,5 @@ app
   .use("/auth", authRouter)
   .use("/engineers", engineerRouter)
   .use("/achievements", achievementRouter)
-  .use("/unlocAchievements", unlockAchievementRouter)
+  .use("/unlockAchievements", unlockAchievementRouter)
   .use("/contributions", contributionRouter);

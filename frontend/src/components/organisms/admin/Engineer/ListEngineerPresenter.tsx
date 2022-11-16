@@ -51,6 +51,7 @@ export const ListEngineerPresenter = ({
               <Tr>
                 <Th>エンジニアID</Th>
                 <Th>エンジニア名</Th>
+                <Th>実績</Th>
                 <Th>編集</Th>
                 <Th>削除</Th>
               </Tr>
@@ -60,6 +61,19 @@ export const ListEngineerPresenter = ({
                 <Tr key={engineer.id}>
                   <Td>{engineer.id}</Td>
                   <Td>{engineer.name}</Td>
+                  <Td>
+                    <Button
+                      onClick={() => {
+                        router.push(
+                          `${engineer.id}/unlocked-achievements-list`
+                        );
+                      }}
+                      leftIcon={<EditIcon />}
+                      variant="solid"
+                    >
+                      実績
+                    </Button>
+                  </Td>
                   <Td>
                     <Button
                       onClick={() => {

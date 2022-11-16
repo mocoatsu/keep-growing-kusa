@@ -14,6 +14,7 @@ export const paths = {
     engineer: {
       list: "/admin/engineer/engineer-list",
       create: "/admin/engineer/engineer-create",
+      achievement: "/admin/engineer/engineer-achievement",
       update: "/admin/engineer/engineer-update",
       delete: "/admin/engineer/engineer-delete",
     },

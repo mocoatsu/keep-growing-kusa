@@ -181,6 +181,34 @@ export const unlockAchievement = (params: any) => {
     });
 };
 
+export const getUnlockedAchievements = (engineerId: string) => {
+  return apiClient
+    .get(`/unlockAchievements/${engineerId}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};
+
+export const deleteUnlockAchievement = (
+  engineerId: string,
+  unlockachievementId: number
+) => {
+  return apiClient
+    .post("/unlockAchievements/delete", {
+      engineerId: engineerId,
+      unlockachievementId: unlockachievementId,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((e: AxiosError) => {
+      throw Error(e.message);
+    });
+};
+
 export const fetchContributions = (useId: number) => {
   return apiClient
     .get(`contributions`)
