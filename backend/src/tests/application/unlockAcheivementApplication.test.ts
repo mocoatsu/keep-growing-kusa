@@ -1,4 +1,4 @@
-import { UnlockAchievementApplicationService } from "../../application/unlockAchievement/unlokAchievementApplicationService";
+import { UnlockAchievementApplicationService } from "../../application/unlockAchievement/unlockAchievementApplicationService";
 import prisma from "../../client";
 import { Achievement } from "../../domain/models/achievement/Achievement";
 import { AchievementCondition } from "../../domain/models/achievement/AchievementCondition";

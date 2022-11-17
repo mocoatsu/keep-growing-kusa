@@ -24,7 +24,7 @@ export class UnlockAchievementRepository
     return new UnlockAchievements(entities);
   }
 
-  async save(unlockAchievements: UnlockAchievements) {
+  async create(unlockAchievements: UnlockAchievements) {
     const unlockAchievementEntities = unlockAchievements.value().map((v) => {
       return {
         achievement_id: v.achievementId.value(),
