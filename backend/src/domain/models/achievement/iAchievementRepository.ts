@@ -6,7 +6,7 @@ import { Achievements } from "./Achievements";
 export interface IAchievementRepository {
   findByPk: (pk: AchievementId) => Promise<Achievement>;
   findBy: (condition?: Condition) => Promise<Achievements>;
-  create: (achievement: Achievement) => Promise<void>;
+  create: (achievement: Achievement) => Promise<Achievement>;
   update: (achievement: Achievement) => Promise<Achievement>;
   delete: (id: AchievementId) => Promise<void>;
 }

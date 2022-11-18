@@ -10,9 +10,7 @@ import { IEngineerRepository } from "./iEnginnerRepository";
 export class EngineerRepository implements IEngineerRepository {
   async findByPk(pk: EngineerId): Promise<Engineer> {
     const instance = await prisma.engineer.findUnique({
-      where: {
-        id: pk.value(),
-      },
+      where: { id: pk.value() },
     });
     if (!instance) {
       throw new Error("Invalid EnginnerId. No Instance found");
@@ -27,17 +25,17 @@ export class EngineerRepository implements IEngineerRepository {
     });
   }
 
-  async create(v: Engineer): Promise<void> {
+  async create(v: Engineer) {
     if (v.password().isEmpty()) {
       throw new Error("password needed");
     }
-    await prisma.engineer.create({
+    const instance = await prisma.engineer.create({
       data: {
         name: v.name().value(),
         password: v.password().value(),
       },
     });
-    return;
+    return this.toEntity(instance);
   }
   // async update(engineer: Engineer): Promise<Engineer> {}
   // async delete(id: EngineerId): Promise<void> {}

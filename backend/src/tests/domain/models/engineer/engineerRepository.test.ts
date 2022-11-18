@@ -15,12 +15,9 @@ afterAll(async () => {
 });
 
 describe("create", () => {
-  it.only("エンジニアを作成できる", async () => {
-    // 処理
-    await new EngineerRepository().create(new Engineer(EngineerId.empty(), new EngineerName("エンジニア"), new EngineerPassword("password")));
+  it("エンジニアを作成できる", async () => {
+    const result = await new EngineerRepository().create(new Engineer(EngineerId.empty(), new EngineerName("エンジニア"), new EngineerPassword("password")));
 
-    // 出力
-    const result = await new EngineerRepository().findByPk(new EngineerId(1));
     expect(result).toEqual(new Engineer(new EngineerId(1), new EngineerName("エンジニア"), EngineerPassword.empty()));
   });
 });

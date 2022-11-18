@@ -42,11 +42,7 @@ export class AchievementApplicationService {
     });
   }
 
-  async create(
-    name: string,
-    description: string,
-    difficultyLevel: string
-  ): Promise<void> {
+  async create(name: string, description: string, difficultyLevel: string) {
     const achievement = Achievement.factoryWithoutId(
       name,
       description,
