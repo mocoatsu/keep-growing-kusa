@@ -54,7 +54,9 @@ export class EngineerApplicationService {
       engineerPassword
     );
 
-    this.engineerRepository.create(engineer);
+    await this.engineerRepository.create(engineer);
+
+    return;
   }
 
   login() {}

@@ -42,7 +42,7 @@ export class UnlockAchievementApplicationService {
     const lockedAchievements = achievements.locked(unlockedAchievements.ids());
     const filledAchievements = lockedAchievements.filledCondition(material);
 
-    this.unlockAchievementRepository.save(
+    await this.unlockAchievementRepository.create(
       filledAchievements.toUnlockAchievements(new EngineerId(engineerId))
     );
 
