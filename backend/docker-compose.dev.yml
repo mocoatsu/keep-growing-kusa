@@ -13,3 +13,8 @@ services:
       POSTGRES_USER: prisma
       POSTGRES_PASSWORD: prisma
       POSTGRES_DB: tests
+    command: -c log_destination=stderr -c log_statement=all -c log_connections=on -c log_disconnections=on
+    logging:
+      options:
+        max-size: "10k"
+        max-file: "5"
