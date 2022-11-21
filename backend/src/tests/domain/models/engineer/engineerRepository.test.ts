@@ -7,7 +7,7 @@ import { EngineerPassword } from "../../../../domain/models/engineer/EngineerPas
 import { Condition, EngineerRepository } from "../../../../domain/models/engineer/engineerRepository";
 
 beforeEach(async () => {
-  await resetTable(["Achievement", "UnlockAchievement", "Engineer"]);
+  await resetTable();
 });
 
 afterAll(async () => {

@@ -15,26 +15,36 @@ import { UnlockAchievement } from "../../../../domain/models/unlockAchievement/u
 import { UnlockAchievementIds } from "../../../../domain/models/unlockAchievement/unlockAchievementIds";
 
 beforeEach(async () => {
-  return await resetTable(["Achievement", "UnlockAchievement", "Engineer"]);
-  // done();
+  await resetTable();
 });
 
 afterAll(async () => {
-  await resetTable(["Achievement", "UnlockAchievement", "Engineer"]);
   await prisma.$disconnect();
+});
+
+describe("create", () => {
+  it.only("解除実績を作成できる", async () => {
+    // 入力
+    await new EngineerRepository().create(new Engineer(EngineerId.empty(), new EngineerName("engineer"), new EngineerPassword("password")));
+    await new AchievementRepository().create(Achievement.factoryWithoutId("achievement1", "実績1", 1));
+    const result = await new UnlockAchievementRepository().create(new UnlockAchievements([new UnlockAchievement(new UnlockAchievementId(1), new AchievementId(1), new EngineerId(1))]));
+    expect(result).toBe(1);
+  });
 });
 
 describe("delete", () => {
   it("解除実績を削除できる", async () => {
-    // // 入力
-    // await new EngineerRepository().create(new Engineer(EngineerId.empty(), new EngineerName("engineer"), new EngineerPassword("password")));
-    // await new AchievementRepository().create(Achievement.factoryWithoutId("achievement1", "実績1", 1));
-    // // await new AchievementRepository().create(Achievement.factoryWithoutId("achievement2", "実績2", 1));
-    // await new UnlockAchievementRepository().create(new UnlockAchievements([new UnlockAchievement(new UnlockAchievementId(1), new AchievementId(1), new EngineerId(1))]));
-    // // 処理
-    // // await new UnlockAchievementRepository().delete(new AchievementId(1), new EngineerId(1));
-    // // 出力
-    // const result = await new UnlockAchievementRepository().findBy(new Condition());
-    // expect(result).toEqual(new UnlockAchievements([new UnlockAchievement(new UnlockAchievementId(2), new AchievementId(1), new EngineerId(1))]));
+    // 入力
+    await new EngineerRepository().create(new Engineer(EngineerId.empty(), new EngineerName("engineer"), new EngineerPassword("password")));
+    await new AchievementRepository().create(Achievement.factoryWithoutId("achievement1", "実績1", 1));
+    await new AchievementRepository().create(Achievement.factoryWithoutId("achievement2", "実績2", 1));
+    await new UnlockAchievementRepository().create(new UnlockAchievements([new UnlockAchievement(new UnlockAchievementId(1), new AchievementId(1), new EngineerId(1))]));
+
+    // 処理
+    // await new UnlockAchievementRepository().delete(new AchievementId(1), new EngineerId(1));
+
+    // 出力
+    const result = await new UnlockAchievementRepository().findBy(new Condition());
+    expect(result).toEqual(new UnlockAchievements([new UnlockAchievement(new UnlockAchievementId(2), new AchievementId(1), new EngineerId(1))]));
   });
 });

@@ -5,7 +5,7 @@ import { Achievement } from "../../../../domain/models/achievement/Achievement";
 import { AchievementId } from "../../../../domain/models/achievement/AchievementId";
 
 beforeEach(async () => {
-  await resetTable(["Achievement", "UnlockAchievement", "Engineer"]);
+  await resetTable();
 });
 
 afterAll(async () => {
