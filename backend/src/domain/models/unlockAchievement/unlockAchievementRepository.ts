@@ -24,19 +24,21 @@ export class UnlockAchievementRepository
     return new UnlockAchievements(entities);
   }
 
-  async save(unlockAchievements: UnlockAchievements) {
-    const unlockAchievementEntities = unlockAchievements.value().map((v) => {
-      return {
-        achievement_id: v.achievementId.value(),
-        engineer_id: v.engineerId.value(),
-      };
+  async create(unlockAchievements: UnlockAchievements) {
+    const input = unlockAchievements
+      .value()
+      .map((v): Prisma.UnlockAchievementUncheckedCreateInput => {
+        return {
+          achievement_id: v.achievementId.value(),
+          engineer_id: v.engineerId.value(),
+        };
+      });
+
+    const result = await prisma.unlockAchievement.createMany({
+      data: input,
     });
 
-    const instances = await prisma.unlockAchievement.createMany({
-      data: unlockAchievementEntities,
-    });
-
-    return;
+    return result.count;
   }
 
   async delete(achievementId: AchievementId, engineerId: EngineerId) {

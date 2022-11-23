@@ -9,9 +9,7 @@ import { IAchievementRepository } from "./iAchievementRepository";
 export class AchievementRepository implements IAchievementRepository {
   async findByPk(pk: AchievementId) {
     const instance = await prisma.achievement.findUnique({
-      where: {
-        id: pk.value(),
-      },
+      where: { id: pk.value() },
     });
     if (!instance) {
       throw new Error("Invalid Achievement Id");
@@ -28,14 +26,14 @@ export class AchievementRepository implements IAchievementRepository {
   }
 
   async create(v: Achievement) {
-    await prisma.achievement.create({
+    const instance = await prisma.achievement.create({
       data: {
         name: v.name,
         description: v.description,
         difficulty_level: v.difficultyLevel,
       },
     });
-    return;
+    return this.toEntity(instance);
   }
 
   async update(achievement: Achievement): Promise<Achievement> {

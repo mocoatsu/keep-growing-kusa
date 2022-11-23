@@ -6,10 +6,9 @@
   "scripts": {
     "migrate": " npx prisma migrate dev",
     "showDB": "npx prisma studio",
-    "docker:up": "docker-compose -f docker-compose.dev.yml up -d",
+    "docker:up": "docker-compose -f docker-compose.dev.yml up  && dotenv -e .env.test -- npx prisma migrate deploy",
     "docker:down": "docker-compose -f docker-compose.dev.yml down",
-    "pretest": "npm run docker:up && dotenv -e .env.test -- npx prisma migrate deploy",
-    "test": "dotenv -e .env.test -- jest"
+    "test": "dotenv -e .env.test -- jest --runInBand"
   },
   "author": "",
   "license": "ISC",
