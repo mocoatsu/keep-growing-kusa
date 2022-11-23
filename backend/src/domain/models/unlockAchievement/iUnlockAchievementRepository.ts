@@ -5,7 +5,7 @@ import { EngineerId } from "../engineer/EngineerId";
 
 export interface IUnlockAchievementRepository {
   findBy: (condition: Condition) => Promise<UnlockAchievements>;
-  create: (v: UnlockAchievements) => Promise<void>;
+  create: (v: UnlockAchievements) => Promise<number>;
   delete: (
     achievementId: AchievementId,
     engineerId: EngineerId
