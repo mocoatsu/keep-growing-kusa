@@ -1,26 +1,21 @@
 import useSWR from "swr";
 import { unlockAchievement } from "../infrastructure/express/api";
+import { Achievement } from "./useAchievements";
 
-export type Achievement = {
-  id: number;
-  name: string;
-  description: string;
-  difficultyLevel: number;
+export type unlockAchievementResponse = {
+  newUnlockedAchievements: Achievement[];
+  unlockedAchievements: Achievement[];
 };
 
-export type Achievements = {
-  achievements: Achievement[];
-};
-
-export const useUnlockAchievements = (): Achievements => {
+/**ユーザー側で使用される*/
+export const useUnlockAchievements = (): unlockAchievementResponse => {
   // @@ idをセッションから取得できるようにする
-  const unlockAchievementSWRResponse = useSWR({ id: "1" }, unlockAchievement, {
+  const apiResponse = useSWR("1", unlockAchievement, {
     suspense: true,
   });
 
-  console.log("useUnlock");
-
   return {
-    achievements: unlockAchievementSWRResponse.data,
+    newUnlockedAchievements: apiResponse.data.newUnlockedAchievements,
+    unlockedAchievements: apiResponse.data.unlockedAchievements,
   };
 };
