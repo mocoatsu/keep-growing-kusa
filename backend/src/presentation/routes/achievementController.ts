@@ -5,6 +5,7 @@ import { UnlockAchievementApplicationService } from "../../application/unlockAch
 import { AchievementId } from "../../domain/models/achievement/AchievementId";
 import { AchievementRepository } from "../../domain/models/achievement/achievementRepository";
 import { UnlockAchievementRepository } from "../../domain/models/unlockAchievement/unlockAchievementRepository";
+import { unlockValidation } from "../validation/unlockAchievementValidation";
 
 export const router = express.Router();
 
@@ -66,16 +67,16 @@ router
     res.json({ message: "実績の削除に成功しました" });
   })
   .post("/unlock", async (req, res) => {
+    const { engineerId } = unlockValidation(req.body.engineerId);
     const unlockAchievementApplicationService =
       new UnlockAchievementApplicationService(
         new UnlockAchievementRepository()
       );
     const material =
       await new ContributionApplicationService().getContributionsMaterial();
-    // @@ エンジニアIDを渡せるようにする
     const unlockAchievements =
       await unlockAchievementApplicationService.unlockFullfilledAchievements(
-        1,
+        engineerId,
         material
       );
 
