@@ -1,4 +1,5 @@
 import * as argon2 from "argon2";
+import { Engineer } from "../models/engineer/Engineer";
 
 import { EngineerName } from "../models/engineer/engineerName";
 import { EngineerPassword } from "../models/engineer/EngineerPassword";
@@ -23,5 +24,17 @@ export class EngineerService {
     const hash = await argon2.hash(password);
 
     return new EngineerPassword(hash);
+  }
+
+  async isPasswordCorrect(name: EngineerName, password: EngineerPassword) {
+    const engineer = await this.findByName(name);
+    return await argon2.verify(engineer.password().value(), password.value());
+  }
+
+  async findByName(name: EngineerName): Promise<Engineer> {
+    const response = await this.engineerRepository.findBy(
+      new Condition().name(name)
+    );
+    return response[0];
   }
 }
