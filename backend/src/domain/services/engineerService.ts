@@ -26,7 +26,7 @@ export class EngineerService {
     return new EngineerPassword(hash);
   }
 
-  async isPasswordCorrect(name: EngineerName, password: EngineerPassword) {
+  async isLoginConditionFilled(name: EngineerName, password: EngineerPassword) {
     const engineer = await this.findByName(name);
     return await argon2.verify(engineer.password().value(), password.value());
   }
