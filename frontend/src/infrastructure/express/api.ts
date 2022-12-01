@@ -168,10 +168,10 @@ export const deleteAchievement = (achivementId: number) => {
     });
 };
 
-export const unlockAchievement = (params: any) => {
+export const unlockAchievement = (engineerId: number) => {
   return apiClient
     .post("/achievements/unlock", {
-      id: params.id,
+      engineerId: engineerId,
     })
     .then((response) => {
       return response.data;
