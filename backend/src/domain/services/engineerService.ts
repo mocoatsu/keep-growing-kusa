@@ -32,7 +32,7 @@ export class EngineerService {
   }
 
   async findByName(name: EngineerName): Promise<Engineer> {
-    const response = await this.engineerRepository.findBy(
+    const response = await this.engineerRepository.findByWithPassword(
       new Condition().name(name)
     );
     return response[0];

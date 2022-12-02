@@ -25,6 +25,15 @@ export class EngineerRepository implements IEngineerRepository {
     });
   }
 
+  async findByWithPassword(
+    condition: Condition = new Condition()
+  ): Promise<Engineer[]> {
+    const instances = await prisma.engineer.findMany(condition.build());
+    return instances.map((i) => {
+      return this.toEntityWithPassword(i);
+    });
+  }
+
   async create(v: Engineer) {
     if (v.password().isEmpty()) {
       throw new Error("password needed");
@@ -45,6 +54,15 @@ export class EngineerRepository implements IEngineerRepository {
       new EngineerId(instance.id),
       new EngineerName(instance.name),
       EngineerPassword.empty() // passwordは外部に露出させない
+    );
+  }
+
+  /** クライアントに値を返却しない処理でのみ使用可能 */
+  private toEntityWithPassword(instance: Instance) {
+    return new Engineer(
+      new EngineerId(instance.id),
+      new EngineerName(instance.name),
+      new EngineerPassword(instance.password)
     );
   }
 }
