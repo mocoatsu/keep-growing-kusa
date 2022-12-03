@@ -26,14 +26,11 @@ describe("isLoginConditionFilled", () => {
   it("ユーザ名に対するパスワードの検証ができる", async () => {
     // 入力
     const engineerService = new EngineerService(new EngineerRepository());
-
-    const name = new EngineerName("test");
-    const encryptedPassword = await engineerService.hashEngineerPassword("password");
-    await new EngineerRepository().create(new Engineer(EngineerId.empty(), name, encryptedPassword));
+    const engineer = new Engineer(EngineerId.empty(), new EngineerName("test"), await engineerService.hashEngineerPassword("password"));
 
     // 処理
-    const correct = await engineerService.isLoginConditionFilled(name, new EngineerPassword("password"));
-    const wrong = await engineerService.isLoginConditionFilled(name, new EngineerPassword("wrong password"));
+    const correct = await engineerService.isLoginConditionFilled(engineer, new EngineerPassword("password"));
+    const wrong = await engineerService.isLoginConditionFilled(engineer, new EngineerPassword("wrong password"));
 
     // 出力
     expect(correct).toBe(true);
