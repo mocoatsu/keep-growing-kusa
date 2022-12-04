@@ -1,6 +1,7 @@
 import { Engineer } from "../../domain/models/engineer/Engineer";
 import { EngineerId } from "../../domain/models/engineer/EngineerId";
 import { EngineerName } from "../../domain/models/engineer/engineerName";
+import { EngineerPassword } from "../../domain/models/engineer/EngineerPassword";
 import { Condition } from "../../domain/models/engineer/engineerRepository";
 import { IEngineerRepository } from "../../domain/models/engineer/iEnginnerRepository";
 import { EngineerService } from "../../domain/services/engineerService";
@@ -59,5 +60,16 @@ export class EngineerApplicationService {
     return;
   }
 
-  login() {}
+  async getLoginEngineer(name: string, password: string) {
+    const engineerService = new EngineerService(this.engineerRepository);
+    const engineer = await engineerService.findByName(new EngineerName(name));
+
+    const isLogin = await engineerService.isLoginConditionFilled(
+      engineer,
+      new EngineerPassword(password)
+    );
+
+    if (!isLogin) return null;
+    return engineer;
+  }
 }
