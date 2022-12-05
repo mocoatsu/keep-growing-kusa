@@ -7,4 +7,5 @@ export const apiClient = Axios.create({
     Accept: "application/json",
     Authorization: "XXXXXX",
   },
+  withCredentials: true,
 });

@@ -14,8 +14,8 @@ export const sessionExpress = session({
   saveUninitialized: true,
   cookie: {
     path: "/", // default
-    httpOnly: true, // default
-    maxAge: 10 * 1000, // 10sec
+    httpOnly: false,
+    maxAge: 100 * 1000,
     secure: false,
   },
 });

@@ -16,7 +16,7 @@ app.listen(port, () => {
 });
 
 app
-  .use(cors())
+  .use(cors({ origin: "http://localhost:3000", credentials: true }))
   .use(express.json())
   .use(morgan("short"))
   .use("/auth", authRouter)
