@@ -12,9 +12,7 @@ export const useUnlockedAchievements = (
   const apiResponse = useSWR(
     engineerId ? engineerId : null,
     getUnlockedAchievements,
-    {
-      suspense: true,
-    }
+    { suspense: true }
   );
 
   return {

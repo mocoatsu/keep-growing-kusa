@@ -8,11 +8,14 @@ export type unlockAchievementResponse = {
 };
 
 /**ユーザー側で使用される*/
-export const useUnlockAchievements = (): unlockAchievementResponse => {
-  // @@ idをセッションから取得できるようにする
-  const apiResponse = useSWR("1", unlockAchievement, {
-    suspense: true,
-  });
+export const useUnlockAchievements = (
+  engineerId: string
+): unlockAchievementResponse => {
+  const apiResponse = useSWR(
+    engineerId ? engineerId : null,
+    unlockAchievement,
+    { suspense: true }
+  );
 
   return {
     newUnlockedAchievements: apiResponse.data.newUnlockedAchievements,

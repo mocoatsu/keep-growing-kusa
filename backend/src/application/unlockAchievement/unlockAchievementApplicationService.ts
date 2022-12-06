@@ -47,8 +47,8 @@ export class UnlockAchievementApplicationService {
     );
 
     return {
-      newUnlockedAchievement: filledAchievements.ids(),
-      unlockedAchievement: unlockedAchievements.ids(),
+      newUnlockedAchievements: filledAchievements.ids(),
+      unlockedAchievements: unlockedAchievements.ids(),
     };
   }
 
