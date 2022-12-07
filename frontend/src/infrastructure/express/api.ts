@@ -170,7 +170,7 @@ export const deleteAchievement = (achivementId: number) => {
 
 export const unlockAchievement = (engineerId: number) => {
   return apiClient
-    .post("/achievements/unlock", {
+    .post("achievements/unlock", {
       engineerId: engineerId,
     })
     .then((response) => {
