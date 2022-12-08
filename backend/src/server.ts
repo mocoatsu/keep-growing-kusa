@@ -2,6 +2,7 @@ import express from "express";
 import "express-async-errors";
 import cors from "cors";
 import morgan from "morgan";
+import { sessionExpress } from "./presentation/middleware";
 import { router as authRouter } from "./presentation/routes/authController";
 import { router as engineerRouter } from "./presentation/routes/engineerController";
 import { router as achievementRouter } from "./presentation/routes/achievementController";
@@ -19,6 +20,7 @@ app
   .use(cors({ origin: "http://localhost:3000", credentials: true }))
   .use(express.json())
   .use(morgan("short"))
+  .use(sessionExpress)
   .use("/auth", authRouter)
   .use("/engineers", engineerRouter)
   .use("/achievements", achievementRouter)
