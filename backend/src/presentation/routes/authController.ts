@@ -1,13 +1,11 @@
 import express from "express";
 import { EngineerApplicationService } from "../../application/engineer/engineerApplicationService";
 import { EngineerRepository } from "../../domain/models/engineer/engineerRepository";
-import { sessionExpress } from "../middleware";
 import { authValidation } from "../validation/authValidation";
 
 export const router = express.Router();
 
 router
-  .use(sessionExpress)
   .post("/signup", async (req, res) => {
     const params = authValidation(req.body.name, req.body.password);
     const engineerApplicaitionService = new EngineerApplicationService(

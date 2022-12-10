@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export function unlockValidation(id: string) {
+export function unlockValidation(id: number | undefined) {
   return z
     .object({
       engineerId: z.number().min(1),

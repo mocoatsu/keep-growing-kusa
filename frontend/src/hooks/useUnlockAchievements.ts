@@ -7,15 +7,11 @@ export type unlockAchievementResponse = {
   unlockedAchievements: Achievement[];
 };
 
-/**ユーザー側で使用される*/
-export const useUnlockAchievements = (
-  engineerId: string
-): unlockAchievementResponse => {
-  const apiResponse = useSWR(
-    engineerId ? engineerId : null,
-    unlockAchievement,
-    { suspense: true }
-  );
+/** 実績を解除する */
+export const useUnlockAchievements = (): unlockAchievementResponse => {
+  const apiResponse = useSWR("achievements/unlock", unlockAchievement, {
+    suspense: true,
+  });
 
   return {
     newUnlockedAchievements: apiResponse.data.newUnlockedAchievements,

@@ -67,7 +67,7 @@ router
     res.json({ message: "実績の削除に成功しました" });
   })
   .post("/unlock", async (req, res) => {
-    const { engineerId } = unlockValidation(req.body.engineerId);
+    const { engineerId } = unlockValidation(req.session.engineerId);
     const unlockAchievementApplicationService =
       new UnlockAchievementApplicationService(
         new UnlockAchievementRepository()
