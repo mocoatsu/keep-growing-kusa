@@ -13,13 +13,11 @@ export function Modal({
   label,
   content,
   isOpen,
-  onOpen,
   onClose,
 }: {
   label: string;
   content: string;
   isOpen: boolean;
-  onOpen: () => void;
   onClose: () => void;
 }) {
   return (
