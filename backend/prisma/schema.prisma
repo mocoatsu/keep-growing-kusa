@@ -29,4 +29,6 @@ model UnlockAchievement {
   engineer_id    Int
   Achievement    Achievement @relation(fields: [achievement_id], references: [id])
   Engineer       Engineer    @relation(fields: [engineer_id], references: [id])
+
+  @@unique([achievement_id, engineer_id])
 }
