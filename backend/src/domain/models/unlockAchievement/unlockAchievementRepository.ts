@@ -1,5 +1,5 @@
 import prisma from "../../../client";
-import { UnlockAchievement as Instance, Prisma } from "@prisma/client";
+import { unlock_achievement as Instance, Prisma } from "@prisma/client";
 
 import { AchievementId } from "../achievement/AchievementId";
 import { UnlockAchievements } from "./UnlockAchievements";
@@ -12,7 +12,7 @@ export class UnlockAchievementRepository
   implements IUnlockAchievementRepository
 {
   async findBy(condition: Condition): Promise<UnlockAchievements> {
-    const instances = await prisma.unlockAchievement.findMany(
+    const instances = await prisma.unlock_achievement.findMany(
       condition.build()
     );
     if (!instances) {
@@ -27,14 +27,14 @@ export class UnlockAchievementRepository
   async create(unlockAchievements: UnlockAchievements) {
     const input = unlockAchievements
       .value()
-      .map((v): Prisma.UnlockAchievementUncheckedCreateInput => {
+      .map((v): Prisma.unlock_achievementUncheckedCreateInput => {
         return {
           achievement_id: v.achievementId.value(),
           engineer_id: v.engineerId.value(),
         };
       });
 
-    const result = await prisma.unlockAchievement.createMany({
+    const result = await prisma.unlock_achievement.createMany({
       data: input,
     });
 
@@ -42,7 +42,7 @@ export class UnlockAchievementRepository
   }
 
   async delete(achievementId: AchievementId, engineerId: EngineerId) {
-    await prisma.unlockAchievement.deleteMany({
+    await prisma.unlock_achievement.deleteMany({
       where: {
         achievement_id: achievementId.value(),
         engineer_id: engineerId.value(),
@@ -61,8 +61,8 @@ export class UnlockAchievementRepository
 }
 
 export class Condition {
-  private condition: Prisma.UnlockAchievementWhereInput;
-  constructor(v: Prisma.UnlockAchievementWhereInput = {}) {
+  private condition: Prisma.unlock_achievementWhereInput;
+  constructor(v: Prisma.unlock_achievementWhereInput = {}) {
     this.condition = v;
   }
 

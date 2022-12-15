@@ -1,5 +1,5 @@
 import prisma from "../../../client";
-import { Engineer as Instance, Prisma } from "@prisma/client";
+import { engineer as Instance, Prisma } from "@prisma/client";
 
 import { Engineer } from "./Engineer";
 import { EngineerId } from "./EngineerId";
@@ -68,8 +68,8 @@ export class EngineerRepository implements IEngineerRepository {
 }
 
 export class Condition {
-  private condition: Prisma.EngineerWhereInput;
-  constructor(v: Prisma.EngineerWhereInput = {}) {
+  private condition: Prisma.engineerWhereInput;
+  constructor(v: Prisma.engineerWhereInput = {}) {
     this.condition = v;
   }
 

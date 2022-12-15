@@ -1,4 +1,4 @@
-import { Achievement as Instance, Prisma } from "@prisma/client";
+import { achievement as Instance, Prisma } from "@prisma/client";
 import prisma from "../../../client";
 
 import { Achievement } from "./Achievement";
@@ -67,8 +67,8 @@ export class AchievementRepository implements IAchievementRepository {
 }
 
 export class Condition {
-  private condition: Prisma.AchievementWhereInput;
-  constructor(v: Prisma.AchievementWhereInput = {}) {
+  private condition: Prisma.achievementWhereInput;
+  constructor(v: Prisma.achievementWhereInput = {}) {
     this.condition = v;
   }
 
