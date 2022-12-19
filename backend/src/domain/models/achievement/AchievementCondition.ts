@@ -1,7 +1,7 @@
 import { UnlockAchievementMaterial } from "../unlockAchievementMaterial/unlockAchievementMaterial";
 import { AchievementId } from "./AchievementId";
 
-// 実績条件
+/** 実績条件 */
 export class AchievementCondition {
   private static readonly _valueToinstanceMap = new Map<
     number,
