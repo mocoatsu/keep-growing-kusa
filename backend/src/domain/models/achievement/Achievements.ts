@@ -1,6 +1,6 @@
 import { EngineerId } from "../engineer/EngineerId";
 import { UnlockAchievement } from "../unlockAchievement/unlockAchievement";
-import { UnlockAchievementIds } from "../unlockAchievement/unlockAchievementIds";
+import { UnlockedAchievementIds } from "../unlockAchievement/unlockAchievementIds";
 import { UnlockAchievements } from "../unlockAchievement/UnlockAchievements";
 import { UnlockAchievementMaterial } from "../unlockAchievementMaterial/unlockAchievementMaterial";
 import { Achievement } from "./Achievement";
@@ -18,7 +18,7 @@ export class Achievements {
   }
 
   // 解除されていない実績のみ取得
-  locked(unlockAchievementIds: UnlockAchievementIds): Achievements {
+  locked(unlockAchievementIds: UnlockedAchievementIds): Achievements {
     const lockedAchievement = this.achievements.filter((achievement) => {
       if (achievement.id === null) {
         throw new Error("invalid achievement id exists");
@@ -31,7 +31,7 @@ export class Achievements {
   }
 
   // 解除された実績のみ取得
-  unlocked(unlockAchievementIds: UnlockAchievementIds): Achievements {
+  unlocked(unlockAchievementIds: UnlockedAchievementIds): Achievements {
     const unlockedAchievements = this.achievements.filter((achievement) => {
       if (achievement.id === null) {
         throw new Error("invalid achievement id exists ");

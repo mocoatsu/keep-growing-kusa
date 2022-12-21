@@ -19,7 +19,7 @@ export class UnlockAchievementApplicationService {
     const achievements = await new AchievementRepository().findBy();
 
     return achievements
-      .unlocked(unlockedAchievements.ids())
+      .unlocked(unlockedAchievements.unlockedAchievementIds())
       .value()
       .map((v) => {
         return {
@@ -39,7 +39,9 @@ export class UnlockAchievementApplicationService {
       new Condition().engineerId(new EngineerId(engineerId))
     );
     const achievements = await new AchievementRepository().findBy();
-    const lockedAchievements = achievements.locked(unlockedAchievements.ids());
+    const lockedAchievements = achievements.locked(
+      unlockedAchievements.unlockedAchievementIds()
+    );
     const filledAchievements = lockedAchievements.filledCondition(material);
 
     await this.unlockAchievementRepository.create(
@@ -48,7 +50,7 @@ export class UnlockAchievementApplicationService {
 
     return {
       newUnlockedAchievements: filledAchievements.ids(),
-      unlockedAchievements: unlockedAchievements.ids(),
+      unlockedAchievements: unlockedAchievements.unlockedAchievementIds(),
     };
   }
 

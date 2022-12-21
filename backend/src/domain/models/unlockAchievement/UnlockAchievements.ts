@@ -1,5 +1,5 @@
 import { UnlockAchievement } from "./unlockAchievement";
-import { UnlockAchievementIds } from "./unlockAchievementIds";
+import { UnlockedAchievementIds } from "./unlockAchievementIds";
 
 export class UnlockAchievements {
   private unlockAchievements: UnlockAchievement[] = [];
@@ -12,15 +12,11 @@ export class UnlockAchievements {
     return [...this.unlockAchievements];
   }
 
-  ids(): UnlockAchievementIds {
+  unlockedAchievementIds(): UnlockedAchievementIds {
     const ids = this.unlockAchievements.map((achievement) => {
-      return achievement.id;
+      return achievement.achievementId;
     });
 
-    const idsWithoutNull = ids.filter((id): id is NonNullable<typeof id> => {
-      return id !== null;
-    });
-
-    return new UnlockAchievementIds(idsWithoutNull);
+    return new UnlockedAchievementIds(ids);
   }
 }

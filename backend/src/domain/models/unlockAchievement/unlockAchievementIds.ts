@@ -1,18 +1,14 @@
-import { UnlockAchievementId } from "./unlockAchievementId";
+import { AchievementId } from "../achievement/AchievementId";
 
-export class UnlockAchievementIds {
-  private unlockAchievementIds: UnlockAchievementId[] = [];
+export class UnlockedAchievementIds {
+  public readonly value: AchievementId[] = [];
 
-  constructor(v: UnlockAchievementId[]) {
-    this.unlockAchievementIds = v;
-  }
-
-  value(): UnlockAchievementId[] {
-    return [...this.unlockAchievementIds];
+  constructor(v: AchievementId[]) {
+    this.value = v;
   }
 
   toNumber(): number[] {
-    return this.unlockAchievementIds.map((v) => {
+    return this.value.map((v) => {
       return Number(v.value());
     });
   }
