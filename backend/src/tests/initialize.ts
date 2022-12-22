@@ -5,9 +5,9 @@ jest.setTimeout(60 * 100 * 5);
 
 export const resetTable = async (): Promise<void> => {
   const tablenames: Prisma.ModelName[] = [
-    "UnlockAchievement",
-    "Achievement",
-    "Engineer",
+    "unlock_achievement",
+    "achievement",
+    "engineer",
   ];
 
   for (const tablename of tablenames) {
